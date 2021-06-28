@@ -123,7 +123,8 @@ void save_spec()
     btn = false;
     start = true;
     WiFi.mode(WIFI_OFF);
-    rnd();
+    cycle = true;
+    // pwm_loop();
 } //save_spec
 
 void init_eeprom()
