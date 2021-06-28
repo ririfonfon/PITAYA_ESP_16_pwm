@@ -10,15 +10,13 @@
 #include <ESPmDNS.h>
 #include <SPIFFS.h>
 
-const char *host = "pitaya";
+
 
 // WiFi network settings
 
+const char *host = "pitaya";
 const char *ssid = "pitaya";
 const char *password = "";
-
-// const char *ssid = "riri_new";
-// const char *password = "B2az41opbn6397";
 
 #define MAX_CLIENT 2
 
@@ -33,7 +31,7 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 void init_wifi()
 {
     WiFi.softAPsetHostname(host);
-    // IPAddress Ip(20, 0, 0, 1);
+    // IPAddress Ip(192, 168, 4, 1);
     // IPAddress NMask(255, 0, 0, 0);
     // WiFi.softAPConfig(Ip, Ip, NMask);
     WiFi.softAP(ssid, password);
@@ -41,19 +39,6 @@ void init_wifi()
     IPAddress myIP = WiFi.softAPIP();
     Serial.print("AP IP address: ");
     Serial.println(myIP);
-    // server.begin();
-
-    // WiFi.setHostname(host);
-    // IPAddress Ip(192, 168, 0, 150);// riri dev
-    // IPAddress NMask(255, 0, 0, 0);
-    // WiFi.config(Ip, Ip, NMask);
-
-    // WiFi.begin(ssid, password);
-    // delay(1000);
-    // IPAddress myIP = WiFi.localIP();
-
-    // Serial.print("IP address: ");
-    // Serial.println(myIP);
 
     //////////////////////////////////////////////////// SPIFFS
     SPIFFS.begin();
