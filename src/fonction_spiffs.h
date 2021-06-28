@@ -1,3 +1,5 @@
+#ifndef fonction_spiffs_h
+#define fonction_spiffs_h
 
 //////////////////////////////////////////spiffs///////////////////////////////////////////////
 File fsUploadFile;
@@ -205,3 +207,5 @@ void listDir(fs::FS &fs, const char * dirname, uint8_t levels) {
     return;
   }
 }
+
+#endif

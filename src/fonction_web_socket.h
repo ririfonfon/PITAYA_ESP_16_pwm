@@ -1,4 +1,5 @@
-
+#ifndef fonction_web_socket_h
+#define fonction_web_socket_h
 
 //////////////////////////////////////////websocket///////////////////////////////////////////////
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
@@ -76,3 +77,5 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
     break;
     } //type
 } //web socket
+
+#endif
