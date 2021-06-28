@@ -1,6 +1,7 @@
 #ifndef led_h
 #define led_h
 
+
 struct Led
 {
   // state variables
@@ -20,6 +21,5 @@ void init_led()
 {
   pinMode(onboard_led.pin, OUTPUT);
 } //init_led
-
 
 #endif
