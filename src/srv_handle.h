@@ -7,23 +7,70 @@
 void eeprom_read()
 {
     FOR_PWM_CHANNELS = EEPROM.read(1);
+
     fade = EEPROM.read(2);
-    decalage = EEPROM.read(3);
-    on = EEPROM.read(4);
-    off = EEPROM.read(5);
+    fade |= (EEPROM.read(3) << 8);
+    fade |= (EEPROM.read(4) << 16);
+    fade |= (EEPROM.read(5) << 24);
+
+    decalage = EEPROM.read(6);
+    decalage |= (EEPROM.read(7) << 8);
+    decalage |= (EEPROM.read(8) << 16);
+    decalage |= (EEPROM.read(9) << 24);
+
+    on = EEPROM.read(10);
+    on |= (EEPROM.read(11) << 8);
+    on |= (EEPROM.read(12) << 16);
+    on |= (EEPROM.read(13) << 24);
+
+    off = EEPROM.read(14);
+    off |= (EEPROM.read(15) << 8);
+    off |= (EEPROM.read(16) << 16);
+    off |= (EEPROM.read(17) << 24);
 
 #ifdef DEBUG
     Serial.println("EEPROM READ");
+    Serial.print(" FOR_PWM_CHANNELS : ");
+    Serial.print(FOR_PWM_CHANNELS);
+    Serial.print(" ");
+    Serial.print(" fade : ");
+    Serial.print(fade);
+    Serial.print(" ");
+    Serial.print(" decalage : ");
+    Serial.print(decalage);
+    Serial.print(" ");
+    Serial.print(" on : ");
+    Serial.print(on);
+    Serial.print(" ");
+    Serial.print(" off : ");
+    Serial.print(off);
+    Serial.println(" ");
 #endif
 } //eeprom_read
 
 void eeprom_write()
 {
     EEPROM.write(1, FOR_PWM_CHANNELS);
+
     EEPROM.write(2, fade);
-    EEPROM.write(3, decalage);
-    EEPROM.write(4, on);
-    EEPROM.write(5, off);
+    EEPROM.write(3, fade >> 8);
+    EEPROM.write(4, fade >> 16);
+    EEPROM.write(5, fade >> 24);
+
+    EEPROM.write(6, decalage);
+    EEPROM.write(7, decalage >> 8);
+    EEPROM.write(8, decalage >> 16);
+    EEPROM.write(9, decalage >> 24);
+
+    EEPROM.write(10, on);
+    EEPROM.write(11, on >> 8);
+    EEPROM.write(12, on >> 16);
+    EEPROM.write(13, on >> 24);
+
+    EEPROM.write(14, off);
+    EEPROM.write(15, off >> 8);
+    EEPROM.write(16, off >> 16);
+    EEPROM.write(17, off >> 24);
 
     EEPROM.write(62, 'O');
     EEPROM.write(63, 'K');
@@ -31,6 +78,22 @@ void eeprom_write()
 
 #ifdef DEBUG
     Serial.println("EEPROM WRITE");
+    Serial.print(" FOR_PWM_CHANNELS : ");
+    Serial.print(FOR_PWM_CHANNELS);
+    Serial.print(" ");
+    Serial.print(" fade : ");
+    Serial.print(fade);
+    Serial.print(" ");
+    Serial.print(" decalage : ");
+    Serial.print(decalage);
+    Serial.print(" ");
+    Serial.print(" on : ");
+    Serial.print(on);
+    Serial.print(" ");
+    Serial.print(" off : ");
+    Serial.print(off);
+    Serial.println(" ");
+
 #endif
 } //eeprom_write
 
@@ -60,6 +123,7 @@ void save_spec()
     btn = false;
     start = true;
     WiFi.mode(WIFI_OFF);
+    rnd();
 } //save_spec
 
 void init_eeprom()
