@@ -31,34 +31,17 @@ void check_btn()
         if (start)
         {
             WiFi.mode(WIFI_AP);
-            start=false;
+            start = false;
+            for (int d = 0; d < FOR_PWM_CHANNELS; d++)
+            {
+                ledcWrite(d, 0);
+            } //for(int d=0; d>FOR_PWM_CHANNELS;d++)
         }
         webSocket.loop();
         server.handleClient();
         onboard_led.on = millis() % 400 < 200;
         onboard_led.update();
-
-        btn_State = digitalRead(BTN_GPIOPIN);
-
-        if (btn_State == HIGH)
-        {
-
-            if (btn == true)
-            {
-                btn = false;
-            }
-            else if (btn == false)
-            {
-                btn = true;
-            }
-#ifdef DEBUG
-            Serial.print("(State == HIGH) btn = ");
-            Serial.println(btn);
-#endif
-        }
-
     }
-
 }
 
 #endif
