@@ -1,19 +1,20 @@
 #ifndef random_h
 #define random_h
 
+
 void rnd()
 {
-    for (int j = 0; j <= FOR_PWM_CHANNELS; j++)
+    for (int j = 0; j <= PWM_CHANNELS; j++)
     {
-        ref[j] = {FOR_PWM_CHANNELS};
+        ref[j] = {PWM_CHANNELS};
     }
     int i = 0;
 
     boolean equals;
 
-    while (i != FOR_PWM_CHANNELS) 
+    while (i != PWM_CHANNELS) 
     {
-        ref[i] = random(FOR_PWM_CHANNELS);
+        ref[i] = random(PWM_CHANNELS);
 
 #ifdef DEBUG
         Serial.print("ref[");
@@ -46,6 +47,5 @@ void rnd()
         }
     }
 }
-
 
 #endif
