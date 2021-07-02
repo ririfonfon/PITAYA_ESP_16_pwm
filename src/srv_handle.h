@@ -8,10 +8,10 @@ void eeprom_read()
 {
     FOR_PWM_CHANNELS = EEPROM.read(1);
 
-    fade = EEPROM.read(2);
-    fade |= (EEPROM.read(3) << 8);
-    fade |= (EEPROM.read(4) << 16);
-    fade |= (EEPROM.read(5) << 24);
+    fade_in = EEPROM.read(2);
+    fade_in |= (EEPROM.read(3) << 8);
+    fade_in |= (EEPROM.read(4) << 16);
+    fade_in |= (EEPROM.read(5) << 24);
 
     decalage = EEPROM.read(6);
     decalage |= (EEPROM.read(7) << 8);
@@ -33,8 +33,8 @@ void eeprom_read()
     Serial.print(" FOR_PWM_CHANNELS : ");
     Serial.print(FOR_PWM_CHANNELS);
     Serial.print(" ");
-    Serial.print(" fade : ");
-    Serial.print(fade);
+    Serial.print(" fade_in : ");
+    Serial.print(fade_in);
     Serial.print(" ");
     Serial.print(" decalage : ");
     Serial.print(decalage);
@@ -52,10 +52,10 @@ void eeprom_write()
 {
     EEPROM.write(1, FOR_PWM_CHANNELS);
 
-    EEPROM.write(2, fade);
-    EEPROM.write(3, fade >> 8);
-    EEPROM.write(4, fade >> 16);
-    EEPROM.write(5, fade >> 24);
+    EEPROM.write(2, fade_in);
+    EEPROM.write(3, fade_in >> 8);
+    EEPROM.write(4, fade_in >> 16);
+    EEPROM.write(5, fade_in >> 24);
 
     EEPROM.write(6, decalage);
     EEPROM.write(7, decalage >> 8);
@@ -81,8 +81,8 @@ void eeprom_write()
     Serial.print(" FOR_PWM_CHANNELS : ");
     Serial.print(FOR_PWM_CHANNELS);
     Serial.print(" ");
-    Serial.print(" fade : ");
-    Serial.print(fade);
+    Serial.print(" fade_in : ");
+    Serial.print(fade_in);
     Serial.print(" ");
     Serial.print(" decalage : ");
     Serial.print(decalage);
@@ -105,7 +105,7 @@ void load_spec()
         if (list[i])
         {
             webSocket.sendTXT(i, "ba:" + String(lround(FOR_PWM_CHANNELS)));
-            webSocket.sendTXT(i, "bb:" + String(lround(fade)));
+            webSocket.sendTXT(i, "bb:" + String(lround(fade_in)));
             webSocket.sendTXT(i, "bc:" + String(lround(decalage)));
 
             webSocket.sendTXT(i, "bd:" + String(lround(on)));
