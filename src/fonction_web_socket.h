@@ -50,7 +50,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             else if (payload[1] == 'b')
             {
                 char *pEnd;
-                fade = strtol((const char *)&payload[2], &pEnd, 8);
+                fade_in = strtol((const char *)&payload[2], &pEnd, 8);
             } //b
             else if (payload[1] == 'c')
             {
