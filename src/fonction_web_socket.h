@@ -67,6 +67,11 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 char *pEnd;
                 off = strtol((const char *)&payload[2], &pEnd, 8);
             } //e
+            else if (payload[1] == 'f')
+            {
+                char *pEnd;
+                fade_out = strtol((const char *)&payload[2], &pEnd, 8);
+            } //e
 
         } //payload[0] == b
         

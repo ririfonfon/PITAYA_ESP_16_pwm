@@ -54,6 +54,11 @@ function connect() {
                 document.getElementById('cc5').value = data[1];
             } //if e
 
+            if (e.data.charAt(1) == 'f') {
+                var data = e.data.split(':');
+                document.getElementById('cc6').value = data[1];
+            } //if e
+
 
 
         } //if b
@@ -129,6 +134,15 @@ function prepareVar5() {
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 5
+
+function prepareVar6() {
+    var a = parseInt(document.getElementById('cc6').value).toString(8);
+    if (a.length < 2) { a = '0' + a; }
+    values = a;
+    var data = "bf" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 6
 
 
 function submitVal(name, val) {

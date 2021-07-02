@@ -28,6 +28,11 @@ void eeprom_read()
     off |= (EEPROM.read(16) << 16);
     off |= (EEPROM.read(17) << 24);
 
+    fade_out = EEPROM.read(18);
+    fade_out |= (EEPROM.read(19) << 8);
+    fade_out |= (EEPROM.read(20) << 16);
+    fade_out |= (EEPROM.read(21) << 24);
+
 #ifdef DEBUG
     Serial.println("EEPROM READ");
     Serial.print(" FOR_PWM_CHANNELS : ");
@@ -44,6 +49,8 @@ void eeprom_read()
     Serial.print(" ");
     Serial.print(" off : ");
     Serial.print(off);
+    Serial.print(" fade_out : ");
+    Serial.print(fade_out);
     Serial.println(" ");
 #endif
 } //eeprom_read
@@ -72,6 +79,11 @@ void eeprom_write()
     EEPROM.write(16, off >> 16);
     EEPROM.write(17, off >> 24);
 
+    EEPROM.write(18, fade_out);
+    EEPROM.write(19, fade_out >> 8);
+    EEPROM.write(20, fade_out >> 16);
+    EEPROM.write(21, fade_out >> 24);
+
     EEPROM.write(62, 'O');
     EEPROM.write(63, 'K');
     EEPROM.commit();
@@ -92,6 +104,8 @@ void eeprom_write()
     Serial.print(" ");
     Serial.print(" off : ");
     Serial.print(off);
+    Serial.print(" fade_out : ");
+    Serial.print(fade_out);
     Serial.println(" ");
 
 #endif
@@ -110,6 +124,7 @@ void load_spec()
 
             webSocket.sendTXT(i, "bd:" + String(lround(on)));
             webSocket.sendTXT(i, "be:" + String(lround(off)));
+            webSocket.sendTXT(i, "bf:" + String(lround(fade_out)));
         }
 
     } // for client
