@@ -11,13 +11,15 @@ uint8_t BTN_GPIOPIN = 15;
 long previousMillis = 0;
 bool cycle = true;
 
-bool f[PWM_CHANNELS] = {false};
+bool f_i[PWM_CHANNELS] = {false};
+bool f_o[PWM_CHANNELS] = {false};
 bool p[PWM_CHANNELS + 1] = {false};
 bool n[PWM_CHANNELS] = {false};
 unsigned long currentp[PWM_CHANNELS];
 
 uint8_t FOR_PWM_CHANNELS = 4;
-long fade = 8;        // fade * 2,6 = seconds
+long fade_in = 8;        // fade_in * 2,6 = seconds
+long fade_out = 8;        // fade_in * 2,6 = seconds
 long decalage = 1000; // milliseconds
 long on = 20000;      // milliseconds
 long off = 20000;     // milliseconds
