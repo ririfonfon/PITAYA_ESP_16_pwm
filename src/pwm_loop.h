@@ -17,6 +17,7 @@ void pwm_loop()
 
     for (int d = 0; d < FOR_PWM_CHANNELS; d++)
     {
+        check_btn();
         if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
         {
             f[d] = true;
@@ -29,11 +30,7 @@ void pwm_loop()
             Serial.println(currentMillis);
 #endif
         } //if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
-    }     //for (int d = 0; d < FOR_PWM_CHANNELS; d++)
-
-    for (int d = 0; d < FOR_PWM_CHANNELS; d++)
-    {
-        check_btn();
+    
         if (f[d])
         {
             fade_clock = millis() % fade < 1;
@@ -56,11 +53,7 @@ void pwm_loop()
 #endif
             }
         } //if (f[d])
-    }     //for (int d = 0; d < FOR_PWM_CHANNELS; d++)
-
-    for (int d = 0; d < FOR_PWM_CHANNELS; d++)
-    {
-        check_btn();
+    
         if (!p[FOR_PWM_CHANNELS] && !n[d] && p[d] && currentMillis - currentp[d] > on)
         {
             value[d] = 0;
@@ -84,11 +77,7 @@ void pwm_loop()
             Serial.println(currentp[FOR_PWM_CHANNELS]);
 #endif
         }
-    } //for (int d = 0; d < FOR_PWM_CHANNELS; d++)
-
-    for (int d = 0; d < FOR_PWM_CHANNELS; d++)
-    {
-        check_btn();
+    
         if (p[FOR_PWM_CHANNELS] && currentMillis - currentp[FOR_PWM_CHANNELS] > off)
         {
             previousMillis = currentMillis;
