@@ -18,47 +18,47 @@ void pwm_loop()
     for (int d = 0; d < FOR_PWM_CHANNELS; d++)
     {
         check_btn();
-        if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
+        if (!f_i[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
         {
-            f[d] = true;
+            f_i[d] = true;
 #ifdef DEBUG
-            Serial.print(" f[");
+            Serial.print(" f_i[");
             Serial.print(d);
             Serial.print("] = ");
-            Serial.print(f[d]);
+            Serial.print(f_i[d]);
             Serial.print(" at ");
             Serial.println(currentMillis);
 #endif
-        } //if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
+        } //if (!f_i[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
 
-        if (f[d])
+        if (f_i[d])
         {
-            if (fade != 0)
+            if (fade_in != 0)
             {
-                fade_clock = millis() % fade < 1;
-                if (fade_clock && f[d])
+                fade_clock = millis() % fade_in < 1;
+                if (fade_clock && f_i[d])
                 {
                     value[d] += 1;
                 }
                 if (value[d] > 65535)
                 {
                     value[d] = 65535;
-                    f[d] = false;
+                    f_i[d] = false;
                     p[d] = true;
                     currentp[d] = currentMillis;
 
 #ifdef DEBUG
-                    Serial.print("in fade  currentp[");
+                    Serial.print("fade_in  currentp[");
                     Serial.print(d);
                     Serial.print("] at ");
                     Serial.println(currentp[d]);
 #endif
                 }
-            } // if (fade > 0)
-            else if (fade <= 0)
+            } // if (fade_in > 0)
+            else if (fade_in <= 0)
             {
                 value[d] = 65535;
-                f[d] = false;
+                f_i[d] = false;
                 p[d] = true;
                 currentp[d] = currentMillis;
 
@@ -68,20 +68,71 @@ void pwm_loop()
                 Serial.print("] at ");
                 Serial.println(currentp[d]);
 #endif
-            } // else if (fade <= 0)
-        }     //if (f[d])
+            } // else if (fade_in <= 0)
+        }     //if (f_i[d])
 
-        if (!p[FOR_PWM_CHANNELS] && !n[d] && p[d] && currentMillis - currentp[d] > on)
+        if (!f_o[d] && !p[FOR_PWM_CHANNELS] && !n[d] && p[d] && currentMillis - currentp[d] > on)
         {
-            value[d] = 0;
-            n[d] = true;
+            f_o[d] = true;
 #ifdef DEBUG
-            Serial.print(" value[");
+            Serial.print(" f_o[");
             Serial.print(d);
-            Serial.print("] = 0 at ");
+            Serial.print("] = ");
+            Serial.print(f_o[d]);
+            Serial.print(" at ");
             Serial.println(currentMillis);
+#endif            
+        } //(!p[FOR_PWM_CHANNELS] && !n[d] && p[d] && currentMillis - currentp[d] > on)
+
+        if (f_o[d])
+        {
+            if (fade_out != 0)
+            {
+                fade_clock = millis() % fade_out < 1;
+                if (fade_clock && f_o[d])
+                {
+                    value[d] -= 1;
+                }
+                if (value[d] < 0)
+                {
+                    value[d] = 0;
+                    f_o[d] = false;
+                    n[d] = true;
+                    currentp[d] = currentMillis;
+
+#ifdef DEBUG
+                    Serial.print("fade_out  currentp[");
+                    Serial.print(d);
+                    Serial.print("] at ");
+                    Serial.println(currentp[d]);
 #endif
-        } //if (!n[d] && p[d] && currentMillis - currentp[d] > on)
+                }
+            } // if (fade_out != 0)
+            else if (fade_out <= 0)
+            {
+                value[d] = 0;
+                f_o[d] = false;
+                n[d] = true;
+                currentp[d] = currentMillis;
+
+#ifdef DEBUG
+                Serial.print("out cut currentp[");
+                Serial.print(d);
+                Serial.print("] at ");
+                Serial.println(currentp[d]);
+#endif
+            } // else if (fade_out <= 0)
+        }     //if (f_i[d])
+
+//             value[d] = 0;
+//             n[d] = true;
+// #ifdef DEBUG
+//             Serial.print(" value[");
+//             Serial.print(d);
+//             Serial.print("] = 0 at ");
+//             Serial.println(currentMillis);
+// #endif
+
 
         if (!p[FOR_PWM_CHANNELS] && n[FOR_PWM_CHANNELS - 1])
         {
@@ -101,7 +152,8 @@ void pwm_loop()
             for (int q = 0; q < FOR_PWM_CHANNELS; q++)
             {
                 p[q] = false;
-                f[q] = false;
+                f_i[q] = false;
+                f_o[q] = false;
                 n[q] = false;
                 p[FOR_PWM_CHANNELS] = false;
             }
