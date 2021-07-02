@@ -30,15 +30,32 @@ void pwm_loop()
             Serial.println(currentMillis);
 #endif
         } //if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)if (!f[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
-    
+
         if (f[d])
         {
-            fade_clock = millis() % fade < 1;
-            if (fade_clock && f[d])
+            if (fade != 0)
             {
-                value[d] += 1;
-            }
-            if (value[d] > 65535)
+                fade_clock = millis() % fade < 1;
+                if (fade_clock && f[d])
+                {
+                    value[d] += 1;
+                }
+                if (value[d] > 65535)
+                {
+                    value[d] = 65535;
+                    f[d] = false;
+                    p[d] = true;
+                    currentp[d] = currentMillis;
+
+#ifdef DEBUG
+                    Serial.print("in fade  currentp[");
+                    Serial.print(d);
+                    Serial.print("] at ");
+                    Serial.println(currentp[d]);
+#endif
+                }
+            } // if (fade > 0)
+            else if (fade <= 0)
             {
                 value[d] = 65535;
                 f[d] = false;
@@ -46,14 +63,14 @@ void pwm_loop()
                 currentp[d] = currentMillis;
 
 #ifdef DEBUG
-                Serial.print(" currentp[");
+                Serial.print("in cut currentp[");
                 Serial.print(d);
                 Serial.print("] at ");
                 Serial.println(currentp[d]);
 #endif
-            }
-        } //if (f[d])
-    
+            } // else if (fade <= 0)
+        }     //if (f[d])
+
         if (!p[FOR_PWM_CHANNELS] && !n[d] && p[d] && currentMillis - currentp[d] > on)
         {
             value[d] = 0;
@@ -77,7 +94,7 @@ void pwm_loop()
             Serial.println(currentp[FOR_PWM_CHANNELS]);
 #endif
         }
-    
+
         if (p[FOR_PWM_CHANNELS] && currentMillis - currentp[FOR_PWM_CHANNELS] > off)
         {
             previousMillis = currentMillis;
