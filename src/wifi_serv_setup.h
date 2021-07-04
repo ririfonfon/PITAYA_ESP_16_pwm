@@ -10,8 +10,6 @@
 #include <ESPmDNS.h>
 #include <SPIFFS.h>
 
-
-
 // WiFi network settings
 
 const char *host = "pitaya";
