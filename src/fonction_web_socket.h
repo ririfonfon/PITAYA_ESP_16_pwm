@@ -29,7 +29,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
         Serial.print(clientn);
         Serial.printf(" [%u] Connected from %d.%d.%d.%d url: %s\n", num, client_ip[0], client_ip[1], client_ip[2], client_ip[3], payload);
 #endif
-        
     }
     break;
 
@@ -74,10 +73,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             } //e
 
         } //payload[0] == b
-        
-        
-        
-        
+
     } //WStype_TEXT:
     break;
     } //type
