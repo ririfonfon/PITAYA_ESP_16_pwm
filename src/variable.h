@@ -18,8 +18,8 @@ bool n[PWM_CHANNELS] = {false};
 unsigned long currentp[PWM_CHANNELS];
 
 uint8_t FOR_PWM_CHANNELS = 4;
-long fade_in = 8;        // fade_in * 2,6 = seconds
-long fade_out = 8;        // fade_in * 2,6 = seconds
+long fade_in = 8;     // fade_in * 2,6 = seconds
+long fade_out = 8;    // fade_in * 2,6 = seconds
 long decalage = 1000; // milliseconds
 long on = 20000;      // milliseconds
 long off = 20000;     // milliseconds
@@ -27,8 +27,6 @@ long off = 20000;     // milliseconds
 int value[PWM_CHANNELS] = {0};
 
 uint8_t ref[PWM_CHANNELS];
-
-
 
 int btn_State = 1;
 
