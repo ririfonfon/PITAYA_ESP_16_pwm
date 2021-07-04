@@ -21,5 +21,4 @@ void init_led()
   pinMode(onboard_led.pin, OUTPUT);
 } //init_led
 
-
 #endif
