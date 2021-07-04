@@ -58,9 +58,9 @@ String getContentType(String filename)
 
 bool handleFileRead(String path)
 {
- #ifdef DEBUG
+#ifdef DEBUG
     Serial.println("handleFileRead: " + path);
- #endif
+#endif
     if (path.endsWith("/"))
         path += "index.htm";
     String contentType = getContentType(path);
@@ -158,29 +158,30 @@ void handleFileList()
     }
 
     String path = server.arg("dir");
- #ifdef DEBUG
+#ifdef DEBUG
     Serial.println("handleFileList: " + path);
- #endif
+#endif
     File dir = SPIFFS.open(path);
     path = String();
 
-    if(!dir.isDirectory())
+    if (!dir.isDirectory())
     {
-    dir.close();
-    server.send(500, "text/plain", "NOT DIR");
+        dir.close();
+        server.send(500, "text/plain", "NOT DIR");
         return;
-   }
-  dir.rewindDirectory();
+    }
+    dir.rewindDirectory();
 
     String output = "[";
-   
-   for (int cnt = 0; true; ++cnt) {
-    File entry = dir.openNextFile();
-    if (!entry)
-    break;
 
-    if (cnt > 0)
-      output += ',';
+    for (int cnt = 0; true; ++cnt)
+    {
+        File entry = dir.openNextFile();
+        if (!entry)
+            break;
+
+        if (cnt > 0)
+            output += ',';
 
         output += "{\"type\":\"";
         output += (entry.isDirectory()) ? "dir" : "file";
@@ -194,18 +195,21 @@ void handleFileList()
     server.send(200, "text/json", output);
 } //handleFileList()
 
-void listDir(fs::FS &fs, const char * dirname, uint8_t levels) {
-  Serial.printf("Listing directory: %s\n", dirname);
+void listDir(fs::FS &fs, const char *dirname, uint8_t levels)
+{
+    Serial.printf("Listing directory: %s\n", dirname);
 
-  File root = fs.open(dirname);
-  if (!root) {
-      Serial.println("Failed to open directory");
-    return;
-  }
-  if (!root.isDirectory()) {
-      Serial.println("Not a directory");
-    return;
-  }
+    File root = fs.open(dirname);
+    if (!root)
+    {
+        Serial.println("Failed to open directory");
+        return;
+    }
+    if (!root.isDirectory())
+    {
+        Serial.println("Not a directory");
+        return;
+    }
 }
 
 #endif
