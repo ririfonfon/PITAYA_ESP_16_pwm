@@ -11,7 +11,7 @@ void rnd()
 
     boolean equals;
 
-    while (i != FOR_PWM_CHANNELS) 
+    while (i != FOR_PWM_CHANNELS)
     {
         ref[i] = random(FOR_PWM_CHANNELS);
 
@@ -46,6 +46,5 @@ void rnd()
         }
     }
 }
-
 
 #endif
