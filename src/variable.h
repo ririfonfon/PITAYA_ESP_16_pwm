@@ -24,6 +24,8 @@ long decalage = 1000; // milliseconds
 long on = 20000;      // milliseconds
 long off = 20000;     // milliseconds
 
+uint16_t High_value = 52428; // 65535= 100% donc 655,35 = 1% ,52428 = 80% , 58981 = 90%
+
 int value[PWM_CHANNELS] = {0};
 
 uint8_t ref[PWM_CHANNELS];

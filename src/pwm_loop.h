@@ -40,9 +40,9 @@ void pwm_loop()
                 {
                     value[d] += 1;
                 }
-                if (value[d] > 65535)
+                if (value[d] > High_value)
                 {
-                    value[d] = 65535;
+                    value[d] = High_value;
                     f_i[d] = false;
                     p[d] = true;
                     currentp[d] = currentMillis;
@@ -57,7 +57,7 @@ void pwm_loop()
             } // if (fade_in > 0)
             else if (fade_in <= 0)
             {
-                value[d] = 65535;
+                value[d] = High_value;
                 f_i[d] = false;
                 p[d] = true;
                 currentp[d] = currentMillis;
