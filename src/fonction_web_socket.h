@@ -49,27 +49,27 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             else if (payload[1] == 'b')
             {
                 char *pEnd;
-                fade_in = strtol((const char *)&payload[2], &pEnd, 8);
+                fade_in = (strtol((const char *)&payload[2], &pEnd, 8)) * 2.6;
             } //b
             else if (payload[1] == 'c')
             {
                 char *pEnd;
-                decalage = strtol((const char *)&payload[2], &pEnd, 8);
+                decalage = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
             } //c
             else if (payload[1] == 'd')
             {
                 char *pEnd;
-                on = strtol((const char *)&payload[2], &pEnd, 8);
+                on = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
             } //d
             else if (payload[1] == 'e')
             {
                 char *pEnd;
-                off = strtol((const char *)&payload[2], &pEnd, 8);
+                off = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
             } //e
             else if (payload[1] == 'f')
             {
                 char *pEnd;
-                fade_out = strtol((const char *)&payload[2], &pEnd, 8);
+                fade_out = (strtol((const char *)&payload[2], &pEnd, 8)) * 2.6;
             } //e
 
         } //payload[0] == b
