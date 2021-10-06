@@ -119,12 +119,12 @@ void load_spec()
         if (list[i])
         {
             webSocket.sendTXT(i, "ba:" + String(lround(FOR_PWM_CHANNELS)));
-            webSocket.sendTXT(i, "bb:" + String(lround(fade_in/2.6)));
+            webSocket.sendTXT(i, "bb:" + String(lround(fade_in)));
             webSocket.sendTXT(i, "bc:" + String(lround(decalage/1000)));
 
             webSocket.sendTXT(i, "bd:" + String(lround(on/1000)));
             webSocket.sendTXT(i, "be:" + String(lround(off/1000)));
-            webSocket.sendTXT(i, "bf:" + String(lround(fade_out/2.6)));
+            webSocket.sendTXT(i, "bf:" + String(lround(fade_out)));
         }
 
     } // for client
