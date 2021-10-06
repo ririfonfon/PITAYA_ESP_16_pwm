@@ -162,7 +162,9 @@ void pwm_loop()
 
     for (int d = 0; d < FOR_PWM_CHANNELS; d++)
     {
+        // ledcWrite(d, ((value[ref[d]] * value[ref[d]]) / 65535));
         ledcWrite(d, value[ref[d]]);
+
     } //for(int d=0; d>FOR_PWM_CHANNELS;d++)
     check_btn();
 }
