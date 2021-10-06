@@ -45,31 +45,55 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 char *pEnd;
                 FOR_PWM_CHANNELS = strtol((const char *)&payload[2], &pEnd, 8);
+#ifdef DEBUG
+                Serial.print(" FOR_PWM_CHANNELS : ");
+                Serial.print(FOR_PWM_CHANNELS);
+#endif
             } //a
             else if (payload[1] == 'b')
             {
                 char *pEnd;
-                fade_in = (strtol((const char *)&payload[2], &pEnd, 8)) * 2.6;
+                fade_in = (strtol((const char *)&payload[2], &pEnd, 8)); // 2.6
+#ifdef DEBUG
+                Serial.print(" fade_in : ");
+                Serial.print(fade_in);
+#endif
             } //b
             else if (payload[1] == 'c')
             {
                 char *pEnd;
                 decalage = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
+#ifdef DEBUG
+                Serial.print(" decalage : ");
+                Serial.print(decalage);
+#endif
             } //c
             else if (payload[1] == 'd')
             {
                 char *pEnd;
                 on = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
+#ifdef DEBUG
+                Serial.print(" on : ");
+                Serial.print(on);
+#endif
             } //d
             else if (payload[1] == 'e')
             {
                 char *pEnd;
                 off = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
+#ifdef DEBUG
+                Serial.print(" off : ");
+                Serial.print(off);
+#endif
             } //e
             else if (payload[1] == 'f')
             {
                 char *pEnd;
-                fade_out = (strtol((const char *)&payload[2], &pEnd, 8)) * 2.6;
+                fade_out = (strtol((const char *)&payload[2], &pEnd, 8)); // 2.6
+#ifdef DEBUG
+                Serial.print(" fade_out : ");
+                Serial.print(fade_out);
+#endif
             } //e
 
         } //payload[0] == b
