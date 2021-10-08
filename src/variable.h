@@ -1,9 +1,9 @@
 #ifndef variable_h
 #define variable_h
 
-#define PWM_CHANNELS 15     //
+#define PWM_CHANNELS 15    //
 #define PWM_FREQUENCY 5000 //
-#define PWM_RESOLUTION 16   //
+#define PWM_RESOLUTION 16  //
 
 uint8_t PWM_GPIOPIN[16] = {32, 33, 25, 26, 27, 14, 12, 13, 23, 22, 21, 19, 18, 5, 4, 0};
 uint8_t BTN_GPIOPIN = 15;
@@ -17,13 +17,13 @@ bool p[PWM_CHANNELS + 1] = {false};
 bool n[PWM_CHANNELS] = {false};
 unsigned long currentp[PWM_CHANNELS];
 
-uint8_t FOR_PWM_CHANNELS = 4;
-long fade_in = 8;     // fade_in * 2,6 = seconds
-long fade_out = 8;    // fade_in * 2,6 = seconds
-long decalage = 1000; // milliseconds
-long on = 20000;      // milliseconds
-long off = 20000;     // milliseconds
-
+// DEFO
+uint8_t FOR_PWM_CHANNELS = 2; // Outputs
+long fade_in = 8;             // Seconds
+long fade_out = 8;            // Seconds
+long decalage = 2000;         // Milliseconds
+long on = 60000;              // Milliseconds
+long off = 40000;             // Milliseconds
 uint16_t High_value = 52428; // 65535= 100% donc 655,35 = 1% ,52428 = 80% , 58981 = 90%
 
 int value[PWM_CHANNELS] = {0};
