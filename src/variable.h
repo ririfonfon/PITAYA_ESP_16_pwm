@@ -18,7 +18,7 @@ bool n[PWM_CHANNELS] = {false};
 unsigned long currentp[PWM_CHANNELS];
 
 // DEFO
-uint8_t FOR_PWM_CHANNELS = 2; // Outputs
+uint8_t FOR_PWM_CHANNELS = 4; // Outputs
 long fade_in = 8;             // Seconds
 long fade_out = 8;            // Seconds
 long decalage = 2000;         // Milliseconds
