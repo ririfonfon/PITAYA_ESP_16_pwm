@@ -1,6 +1,7 @@
 // platformio run --target uploadfs // cmd console download spiff
 
 #include <Arduino.h>
+#include <FastLED.h>
 
 #define DEBUG 1
 
