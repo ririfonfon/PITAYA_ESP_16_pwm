@@ -10,7 +10,7 @@ void check_btn()
 {
     btn_State = digitalRead(BTN_GPIOPIN);
 
-    if (btn_State == HIGH)
+    if (btn_State == LOW)
     {
 
         if (btn == true)
