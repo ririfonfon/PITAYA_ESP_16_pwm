@@ -3,14 +3,24 @@ window.addEventListener('load', setup);
 var connection;
 
 function connect() {
+
+    `use strict`;
+    function refreshTime() {
+        const timeDisplay = document.getElementById("time");
+        const dateString = new Date().toLocaleString();
+        const formattedString = dateString.replace(", ", " - ");
+        timeDisplay.textContent = formattedString;
+    }
+    setInterval(refreshTime, 1000);
+
     console.log('connect()');
     connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
 
-    connection.onopen = function() {
+    connection.onopen = function () {
         connection.send('Connect ' + new Date());
     };
 
-    connection.onmessage = function(e) {
+    connection.onmessage = function (e) {
         console.log('Server: ', e.data);
 
         if (e.data.charAt(0) == 'cc') {
@@ -21,7 +31,7 @@ function connect() {
         if (e.data.charAt(0) == 'mem') {
             var val = e.data.split(':')[1];
             var elems = document.querySelectorAll('#mode li a');
-            [].forEach.call(elems, function(el) {
+            [].forEach.call(elems, function (el) {
                 el.classList.remove('active');
             });
             document.getElementById(val).classList.add('active');
@@ -65,18 +75,18 @@ function connect() {
 
     }; //function (e)
 
-    connection.onclose = function(e) {
+    connection.onclose = function (e) {
         console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
         connection.close();
-        setTimeout(function() {
+        setTimeout(function () {
             connect();
         }, 1000);
     };
 
-    connection.onerror = function(err) {
+    connection.onerror = function (err) {
         console.error('Socket encountered error: ', err.message, 'Closing socket');
         connection.close();
-        setTimeout(function() {
+        setTimeout(function () {
             connect();
         }, 1000);
     };
@@ -86,6 +96,8 @@ connect();
 
 id_array = new Array('cc1');
 values = new Array(id_array.length);
+
+
 
 
 ////////////////////////////////////////////////////////////////prepare
@@ -144,6 +156,15 @@ function prepareVar6() {
     connection.send(data);
 } //prepare 6
 
+function prepareVar10() {
+    var a = parseInt(document.getElementById('off_time').value).toString();
+    // if (a.length < 4) { a = '000' + a; }
+    values = a;
+    var data = "off_time" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 10
+
 
 function submitVal(name, val) {
     var xhttp = new XMLHttpRequest();
@@ -160,7 +181,7 @@ function handle_M_B_S(e) {
 
     if (e.target.className.indexOf('mem') > -1) {
         elems = document.querySelectorAll('#mode li a');
-        [].forEach.call(elems, function(el) {
+        [].forEach.call(elems, function (el) {
             el.classList.remove('active');
             name = e.target.className;
         });
@@ -203,7 +224,7 @@ function setup() {
     var xhttp = new XMLHttpRequest();
 
     elems = document.querySelectorAll('ul li a'); // adds listener
-    [].forEach.call(elems, function(el) {
+    [].forEach.call(elems, function (el) {
         // el.addEventListener('touchstart', handle_M_B_S, false);
         el.addEventListener('click', handle_M_B_S, false);
     });
