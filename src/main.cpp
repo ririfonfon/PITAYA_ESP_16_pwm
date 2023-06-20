@@ -7,6 +7,7 @@
 
 #include "variable.h"
 #include "led.h"
+#include "rtc_clock.h"
 #include "random.h"
 #include "wifi_serv_setup.h"
 #include "btn.h"
@@ -37,8 +38,6 @@ void setup()
     ledcSetup(k, PWM_FREQUENCY, PWM_RESOLUTION);
   }
 
-  // random output
-  rnd();
 #ifdef DEBUG
   for (int k = 0; k > FOR_PWM_CHANNELS; k++)
   {
