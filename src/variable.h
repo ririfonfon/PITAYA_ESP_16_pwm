@@ -42,4 +42,15 @@ bool list[MAX_CLIENT] = {false}; // client
 
 bool start = true;
 
+uint8_t time_on_Hour;
+uint8_t time_on_Minute;
+uint8_t time_on_Second;
+
+uint8_t time_off_Hour;
+uint8_t time_off_Minute;
+uint8_t time_off_Second;
+
+int8_t time_zone = 1;
+
+
 #endif
