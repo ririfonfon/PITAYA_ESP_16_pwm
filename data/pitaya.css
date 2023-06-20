@@ -9,7 +9,7 @@ body {
 }
 
 .content {
-    max-width: 500px;
+    max-width: 100%;
     margin: auto;
     /*  border: 1px solid green;*/
 }
@@ -55,6 +55,41 @@ form {
 
 
 /*FADER NAME*/
+
+
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]+label {
+    color: #ccc;
+    cursor: pointer;
+}
+
+input[type=checkbox]:checked+label {
+    color: #333;
+}
+
+.days {
+    display: inline;
+    padding: 20% 20%;
+    text-align: center;
+
+}
+
+.control-label {
+    display: block;
+    padding: 10px 10px;
+    text-align: center;
+    /* width: 15%; */
+}
+
+.clock-set {
+    display: block;
+    padding: 0px 0px;
+    text-align: center;
+}
 
 .slider-title {
     display: block;
