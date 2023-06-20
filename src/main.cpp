@@ -8,7 +8,6 @@
 #include "variable.h"
 #include "led.h"
 #include "rtc_clock.h"
-#include "random.h"
 #include "wifi_serv_setup.h"
 #include "btn.h"
 #include "pwm_loop.h"
