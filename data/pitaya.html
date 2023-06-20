@@ -13,42 +13,46 @@
 
 <body class="noselect noscroll">
     <div class="content">
-        <h1>PITAYA</h1>
+        <h1>PITAYA Stamp</h1>
 
-        <div class="slider-title">
-            <div class="slider-group">
-                <div class="slider-box">
-                    <div class="num-wrapper">
-                        <input id="cc1" type="number" placeholder="5" min="1" max="16" step="1" oninput="prepareVar1(); ">
-                    </div>
-                    <div class="slider-title">
-                        <p style="color:#ffffff">OUTPUT</p>
-                    </div>
-                </div>
-            </div>
+        <h1> Time is <span id="time"> </span></h1>
+        <script src="pitaya.js">   </script>
+
+        <label class="control-label" for="WorkWeek">Work Week</label>
+        <div class="days days0">
+            <input type="checkbox" value="N" id="daySu0"><label for="daySu0">Sunday</label>&nbsp;&nbsp;
+            <input type="checkbox" value="M" id="dayMo0"><label for="dayMo0">Monday</label>&nbsp;&nbsp;
+            <input type="checkbox" value="T" id="dayTu0"><label for="dayTu0">Tuesday</label>&nbsp;&nbsp;
+            <input type="checkbox" value="W" id="dayWe0"><label for="dayWe0">Wednesday</label>&nbsp;&nbsp;
+            <input type="checkbox" value="R" id="dayTh0"><label for="dayTh0">Thursday</label>&nbsp;&nbsp;
+            <input type="checkbox" value="F" id="dayFr0"><label for="dayFr0">Friday</label>&nbsp;&nbsp;
+            <input type="checkbox" value="S" id="daySa0"><label for="daySa0">Saturday</label>&nbsp;&nbsp;        </div>
+        </div>
+
+        <div class="clock-set">
+            <p style="color:#ffffff">Set Date Time</p>
+            <input type="datetime-local"  id="time" value="2023-06-12T19:30" name="set" min="00:00" max="23:59" required>
+        </div>
+
+        <div class="clock-set">
+            <p style="color:#ffffff">ON Time</p>
+            <input type="time" id="on_time" name="set" min="00:00" max="23:59" required>
+        </div>
+
+        <div class="clock-set">
+            <p style="color:#ffffff">OFF Time</p>
+            <input type="time" id="off_time" name="off_time" min="00:00" max="23:59" required oninput="prepareVar10();">
         </div>
 
         <div class="slider-title">
             <div class="slider-group">
                 <div class="slider-box">
-                    <div class="num-wrapper">
-                        <input id="cc2" type="number" placeholder="8" min="0" max="825955248" step="1" oninput="prepareVar2(); ">
-                    </div>
                     <div class="slider-title">
                         <p style="color:#ffffff">FADE IN Sec // 0 = CUT</p>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slider-title">
-            <div class="slider-group">
-                <div class="slider-box">
                     <div class="num-wrapper">
-                        <input id="cc3" type="number" placeholder="1" min="0" max="2147483" step="1" oninput="prepareVar3()">
-                    </div>
-                    <div class="slider-title">
-                        <p style="color:#ffffff">DECAY Sec</p>
+                        <input id="cc2" type="number" placeholder="8" min="0" max="825955248" step="1"
+                            oninput="prepareVar2(); ">
                     </div>
                 </div>
             </div>
@@ -57,12 +61,13 @@
         <div class="slider-title">
             <div class="slider-group">
                 <div class="slider-box">
-                    <div class="num-wrapper">
-                        <input id="cc4" type="number" placeholder="1" min="0" max="2147483" step="1" oninput="prepareVar4()">
-                    </div>
                     <div class="slider-title">
                         <p style="color:#ffffff">ON TIME Sec</p>
                     </div>
+                    <div class="num-wrapper">
+                        <input id="cc4" type="number" placeholder="1" min="0" max="2147483" step="1"
+                            oninput="prepareVar4()">
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,12 +75,13 @@
         <div class="slider-title">
             <div class="slider-group">
                 <div class="slider-box">
-                    <div class="num-wrapper">
-                        <input id="cc5" type="number" placeholder="1" min="0" max="2147483" step="1" oninput="prepareVar5()">
-                    </div>
                     <div class="slider-title">
                         <p style="color:#ffffff">OFF TIME Sec</p>
                     </div>
+                    <div class="num-wrapper">
+                        <input id="cc5" type="number" placeholder="1" min="0" max="2147483" step="1"
+                            oninput="prepareVar5()">
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,11 +89,12 @@
         <div class="slider-title">
             <div class="slider-group">
                 <div class="slider-box">
-                    <div class="num-wrapper">
-                        <input id="cc6" type="number" placeholder="8" min="0" max="825955248" step="1" oninput="prepareVar6(); ">
-                    </div>
                     <div class="slider-title">
                         <p style="color:#ffffff">FADE OUT Sec // 0 = CUT</p>
+                    </div>
+                    <div class="num-wrapper">
+                        <input id="cc6" type="number" placeholder="8" min="0" max="825955248" step="1"
+                            oninput="prepareVar6(); ">
                     </div>
                 </div>
             </div>
