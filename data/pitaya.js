@@ -102,15 +102,6 @@ values = new Array(id_array.length);
 
 ////////////////////////////////////////////////////////////////prepare
 
-function prepareVar1() {
-    var a = parseInt(document.getElementById('cc1').value).toString(8);
-    if (a.length < 2) { a = '0' + a; }
-    values = a;
-    var data = "ba" + values;
-    console.log('eData: ' + data);
-    connection.send(data);
-} //prepare 1
-
 function prepareVar2() {
     var a = parseInt(document.getElementById('cc2').value).toString(8);
     if (a.length < 2) { a = '0' + a; }
@@ -119,15 +110,6 @@ function prepareVar2() {
     console.log('fData: ' + data);
     connection.send(data);
 } //prepare 2
-
-function prepareVar3() {
-    var a = parseInt(document.getElementById('cc3').value).toString(8);
-    if (a.length < 2) { a = '0' + a; }
-    values = a;
-    var data = "bc" + values;
-    console.log('gData: ' + data);
-    connection.send(data);
-} //prepare 3
 
 function prepareVar4() {
     var a = parseInt(document.getElementById('cc4').value).toString(8);
@@ -156,14 +138,91 @@ function prepareVar6() {
     connection.send(data);
 } //prepare 6
 
-function prepareVar10() {
-    var a = parseInt(document.getElementById('off_time').value).toString();
+function prepareVar11() {
+    // var a = parseInt(document.getElementById('off_time').value).toString();
+    var a = document.getElementById('time').value;
     // if (a.length < 4) { a = '000' + a; }
     values = a;
-    var data = "off_time" + values;
+    var data = "time/" + values;
     console.log('iData: ' + data);
     connection.send(data);
-} //prepare 10
+} //prepare 11
+
+function prepareVar12() {
+    // var a = parseInt(document.getElementById('off_time').value).toString();
+    var a = document.getElementById('on_time').value;
+    // if (a.length < 4) { a = '000' + a; }
+    values = a;
+    var data = "on_time/" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 12
+
+function prepareVar13() {
+    // var a = parseInt(document.getElementById('off_time').value).toString();
+    var a = document.getElementById('off_time').value;
+    // if (a.length < 4) { a = '000' + a; }
+    values = a;
+    var data = "off_time/" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 13
+
+function prepareVar21() {
+    var a = document.getElementById('daySu0').checked;
+    values = a;
+    var data = "daySu_" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 21
+
+function prepareVar22() {
+    var a = document.getElementById('dayMo0').checked;
+    values = a;
+    var data = "dayMo_" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 22
+
+function prepareVar23() {
+    var a = document.getElementById('dayTu0').checked;
+    values = a;
+    var data = "dayTu_" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 23
+
+function prepareVar24() {
+    var a = document.getElementById('dayWe0').checked;
+    values = a;
+    var data = "dayWe_" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 24
+
+function prepareVar25() {
+    var a = document.getElementById('dayTh0').checked;
+    values = a;
+    var data = "dayTh_" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 25
+
+function prepareVar26() {
+    var a = document.getElementById('dayFr0').checked;
+    values = a;
+    var data = "dayFr_" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 26
+
+function prepareVar27() {
+    var a = document.getElementById('daySa0').checked;
+    values = a;
+    var data = "daySa_" + values;
+    console.log('iData: ' + data);
+    connection.send(data);
+} //prepare 27
 
 
 function submitVal(name, val) {
