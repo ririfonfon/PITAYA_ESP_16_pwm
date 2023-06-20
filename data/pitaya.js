@@ -139,7 +139,7 @@ function prepareVar6() {
 } //prepare 6
 
 function prepareVar11() {
-    // var a = parseInt(document.getElementById('off_time').value).toString();
+    // var a = parseInt(document.getElementById('time').value).toString(8);
     var a = document.getElementById('time').value;
     // if (a.length < 4) { a = '000' + a; }
     values = a;
