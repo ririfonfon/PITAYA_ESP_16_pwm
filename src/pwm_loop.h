@@ -156,7 +156,7 @@ void pwm_loop()
                 n[q] = false;
                 p[FOR_PWM_CHANNELS] = false;
             }
-            rnd();
+            // rnd();
         } //if (p[FOR_PWM_CHANNELS] && currentMillis - currentp[FOR_PWM_CHANNELS] > off)
     }     //for (int d = 0; d < FOR_PWM_CHANNELS; d++)
 
