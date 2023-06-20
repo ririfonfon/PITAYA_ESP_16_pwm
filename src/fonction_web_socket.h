@@ -41,16 +41,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
 #ifdef DEBUGsocket
             Serial.println("payload[0] == 'b'");
 #endif
-            if (payload[1] == 'a')
-            {
-                char *pEnd;
-                FOR_PWM_CHANNELS = strtol((const char *)&payload[2], &pEnd, 8);
-#ifdef DEBUG
-                Serial.print(" FOR_PWM_CHANNELS : ");
-                Serial.print(FOR_PWM_CHANNELS);
-#endif
-            } //a
-            else if (payload[1] == 'b')
+            if (payload[1] == 'b')
             {
                 char *pEnd;
                 fade_in = (strtol((const char *)&payload[2], &pEnd, 8)); // 2.6
@@ -59,15 +50,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 Serial.print(fade_in);
 #endif
             } //b
-            else if (payload[1] == 'c')
-            {
-                char *pEnd;
-                decalage = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
-#ifdef DEBUG
-                Serial.print(" decalage : ");
-                Serial.print(decalage);
-#endif
-            } //c
             else if (payload[1] == 'd')
             {
                 char *pEnd;
