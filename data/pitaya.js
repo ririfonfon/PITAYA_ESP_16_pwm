@@ -138,22 +138,13 @@ function prepareVar6() {
     connection.send(data);
 } //prepare 6
 
-function prepareVar11() {
-    // var a = parseInt(document.getElementById('time').value).toString(8);
-    var a = document.getElementById('time').value;
-    // if (a.length < 4) { a = '000' + a; }
-    values = a;
-    var data = "time/" + values;
-    console.log('iData: ' + data);
-    connection.send(data);
-} //prepare 11
 
 function prepareVar12() {
     // var a = parseInt(document.getElementById('off_time').value).toString();
     var a = document.getElementById('on_time').value;
     // if (a.length < 4) { a = '000' + a; }
     values = a;
-    var data = "on_time/" + values;
+    var data = "co/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 12
@@ -163,7 +154,7 @@ function prepareVar13() {
     var a = document.getElementById('off_time').value;
     // if (a.length < 4) { a = '000' + a; }
     values = a;
-    var data = "off_time/" + values;
+    var data = "cf/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 13
@@ -171,7 +162,7 @@ function prepareVar13() {
 function prepareVar21() {
     var a = document.getElementById('daySu0').checked;
     values = a;
-    var data = "daySu_" + values;
+    var data = "d1/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 21
@@ -179,7 +170,7 @@ function prepareVar21() {
 function prepareVar22() {
     var a = document.getElementById('dayMo0').checked;
     values = a;
-    var data = "dayMo_" + values;
+    var data = "d2/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 22
@@ -187,7 +178,7 @@ function prepareVar22() {
 function prepareVar23() {
     var a = document.getElementById('dayTu0').checked;
     values = a;
-    var data = "dayTu_" + values;
+    var data = "d3/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 23
@@ -195,7 +186,7 @@ function prepareVar23() {
 function prepareVar24() {
     var a = document.getElementById('dayWe0').checked;
     values = a;
-    var data = "dayWe_" + values;
+    var data = "d4/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 24
@@ -203,7 +194,7 @@ function prepareVar24() {
 function prepareVar25() {
     var a = document.getElementById('dayTh0').checked;
     values = a;
-    var data = "dayTh_" + values;
+    var data = "d5/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 25
@@ -211,7 +202,7 @@ function prepareVar25() {
 function prepareVar26() {
     var a = document.getElementById('dayFr0').checked;
     values = a;
-    var data = "dayFr_" + values;
+    var data = "d6/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 26
@@ -219,7 +210,7 @@ function prepareVar26() {
 function prepareVar27() {
     var a = document.getElementById('daySa0').checked;
     values = a;
-    var data = "daySa_" + values;
+    var data = "d7/" + values;
     console.log('iData: ' + data);
     connection.send(data);
 } //prepare 27
@@ -247,6 +238,14 @@ function handle_M_B_S(e) {
         e.target.classList.add('active');
     }
     submitVal(name, val);
+
+    // SAVE: send clock
+    if (val == 1) {
+        let clock = Math.floor(Date.now()/1000); // now in seconds since 1970
+        submitVal('clock', clock);
+        console.log('clock: ' + clock);
+    }
+
 } //handle_M_B_S
 
 function rgbToHsl(r, g, b) {
