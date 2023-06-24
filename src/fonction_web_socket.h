@@ -49,7 +49,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 Serial.print(" fade_in : ");
                 Serial.print(fade_in);
 #endif
-            } //b
+            } // b
             else if (payload[1] == 'd')
             {
                 char *pEnd;
@@ -58,7 +58,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 Serial.print(" on : ");
                 Serial.print(on);
 #endif
-            } //d
+            } // d
             else if (payload[1] == 'e')
             {
                 char *pEnd;
@@ -67,7 +67,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 Serial.print(" off : ");
                 Serial.print(off);
 #endif
-            } //e
+            } // e
             else if (payload[1] == 'f')
             {
                 char *pEnd;
@@ -76,13 +76,67 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 Serial.print(" fade_out : ");
                 Serial.print(fade_out);
 #endif
-            } //e
+            } // e
 
-        } //payload[0] == b
+        } // payload[0] == b
 
-    } //WStype_TEXT:
+        if (payload[0] == 'c')
+        {
+            if (payload[1] == 'o')
+            {
+                time_on = (strtol((const char *)&payload[3], &pEnd, 8)); // on_time
+#ifdef DEBUG
+                Serial.print(" on_time : ");
+                Serial.print(time_on);
+#endif
+            }
+            else if (payload[1] = 'f')
+            {
+                time_off = (strtol((const char *)&payload[3], &pEnd, 8)); // off_time
+#ifdef DEBUG
+                Serial.print(" off_time : ");
+                Serial.print(time_off);
+#endif
+            }
+
+        } // payload[0] == c
+
+        if (payload[0] == 'd')
+        {
+            if (payload[1] == '1')
+            {
+
+            }
+            else if (payload[1] == '2')
+            {
+                
+            }
+            else if (payload[1] == '3')
+            {
+                
+            }
+            else if (payload[1] == '4')
+            {
+                
+            }
+            else if (payload[1] == '5')
+            {
+                
+            }
+            else if (payload[1] == '6')
+            {
+                
+            }
+            else if (payload[1] == '7')
+            {
+                
+            }
+
+        } // payload[0] == d
+
+    } // WStype_TEXT:
     break;
-    } //type
-} //web socket
+    } // type
+} // web socket
 
 #endif
