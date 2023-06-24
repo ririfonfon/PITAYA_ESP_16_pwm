@@ -1,6 +1,8 @@
 #ifndef srv_handle_h
 #define srv_handle_h
 
+#include <RtcDS3231.h>
+
 #include <EEPROM.h>
 #define EEPROM_SIZE 64
 
@@ -197,6 +199,20 @@ void srv_handle_set()
                 save_spec();
             } //if(Mem==1){
         }     //serveur mem
+
+        ////////////////////// SET CLOCK
+        if (server.argName(i) == "clock")
+        {
+            uint32_t clock = strtoull(server.arg(i).c_str(), NULL, 10);
+            Serial.print("Clock: ");
+            Serial.println(clock);
+
+            RtcDateTime newClock;
+            newClock.InitWithUnix32Time(clock);
+            printDateTime(newClock);
+            
+            Rtc.SetDateTime(newClock);
+        }
 
     } //serveur args
     server.send(200, "text/plain", "OK");
