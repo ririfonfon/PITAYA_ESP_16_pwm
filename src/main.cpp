@@ -9,6 +9,7 @@
 #include "led.h"
 #include "rtc_clock.h"
 #include "wifi_serv_setup.h"
+#include "deep_sleep.h"
 #include "btn.h"
 #include "pwm_loop.h"
 
