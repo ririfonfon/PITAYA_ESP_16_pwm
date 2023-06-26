@@ -39,20 +39,10 @@ function connect() {
 
         if (e.data.charAt(0) == 'b') {
 
-            if (e.data.charAt(1) == 'a') {
-                var data = e.data.split(':');
-                document.getElementById('cc1').value = data[1];
-            } //if a
-
             if (e.data.charAt(1) == 'b') {
                 var data = e.data.split(':');
                 document.getElementById('cc2').value = data[1];
             } //if b
-
-            if (e.data.charAt(1) == 'c') {
-                var data = e.data.split(':');
-                document.getElementById('cc3').value = data[1];
-            } //if c
 
             if (e.data.charAt(1) == 'd') {
                 var data = e.data.split(':');
@@ -67,11 +57,58 @@ function connect() {
             if (e.data.charAt(1) == 'f') {
                 var data = e.data.split(':');
                 document.getElementById('cc6').value = data[1];
-            } //if e
-
-
+            } //if f
 
         } //if b
+
+        if (e.data.charAt(0) == 'd') {
+
+            if (e.data.charAt(1) == '1') {
+                var data = e.data.split('/');
+                document.getElementById('daySu0').value = data[1];
+            }
+
+            if (e.data.charAt(1) == '2') {
+                var data = e.data.split('/');
+                document.getElementById('dayMo0').value = data[1];
+            }
+
+            if (e.data.charAt(1) == '3') {
+                var data = e.data.split('/');
+                document.getElementById('dayTu0').value = data[1];
+            }
+            if (e.data.charAt(1) == '4') {
+                var data = e.data.split('/');
+                document.getElementById('dayWe0').value = data[1];
+            }
+
+            if (e.data.charAt(1) == '5') {
+                var data = e.data.split('/');
+                document.getElementById('dayTh0').value = data[1];
+            }
+
+            if (e.data.charAt(1) == '6') {
+                var data = e.data.split('/');
+                document.getElementById('dayFr0').value = data[1];
+            }
+
+            if (e.data.charAt(1) == '7') {
+                var data = e.data.split('/');
+                document.getElementById('daySa0').value = data[1];
+            }
+        } //if d
+
+        if (e.data.charAt(0) == 'c') {
+            if (e.data.charAt(1) == 'o'){
+                var data = e.data.split('/');
+                document.getElementById('on_time').value = data[1]; 
+            }
+            if (e.data.charAt(1) == 'f'){
+                var data = e.data.split('/');
+                document.getElementById('off_time').value = data[1];  
+            }
+
+        }
 
     }; //function (e)
 
@@ -241,7 +278,7 @@ function handle_M_B_S(e) {
 
     // SAVE: send clock
     if (val == 1) {
-        let clock = Math.floor(Date.now()/1000); // now in seconds since 1970
+        let clock = Math.floor(Date.now() / 1000); // now in seconds since 1970
         submitVal('clock', clock);
         console.log('clock: ' + clock);
     }
