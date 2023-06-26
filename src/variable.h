@@ -52,5 +52,7 @@ uint8_t time_off_Second;
 
 int8_t time_zone = 1;
 
+bool D_W[7] = {false,false,false,false,false,false,false};
+
 
 #endif
