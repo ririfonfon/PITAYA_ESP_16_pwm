@@ -97,10 +97,16 @@ void load_spec()
     {
         if (list[i])
         {
-            webSocket.sendTXT(i, "ba:" + String(lround(FOR_PWM_CHANNELS)));
+            webSocket.sendTXT(i, "d1/" + String());
+            webSocket.sendTXT(i, "d2/" + String());
+            webSocket.sendTXT(i, "d3/" + String());
+            webSocket.sendTXT(i, "d4/" + String());
+            webSocket.sendTXT(i, "d5/" + String());
+            webSocket.sendTXT(i, "d6/" + String());
+            webSocket.sendTXT(i, "d7/" + String());
+            webSocket.sendTXT(i, "co/" + String(lround()) + ":" + String(lround()));
+            webSocket.sendTXT(i, "cf/" + String(lround()) + ":" + String(lround()));
             webSocket.sendTXT(i, "bb:" + String(lround(fade_in)));
-            webSocket.sendTXT(i, "bc:" + String(lround(decalage/1000)));
-
             webSocket.sendTXT(i, "bd:" + String(lround(on/1000)));
             webSocket.sendTXT(i, "be:" + String(lround(off/1000)));
             webSocket.sendTXT(i, "bf:" + String(lround(fade_out)));
@@ -187,7 +193,7 @@ void srv_handle_set()
             RtcDateTime newClock;
             newClock.InitWithUnix32Time(clock);
             printDateTime(newClock);
-            
+
             Rtc.SetDateTime(newClock);
         }
 
