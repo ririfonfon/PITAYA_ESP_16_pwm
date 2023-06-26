@@ -1,6 +1,8 @@
 #ifndef fonction_web_socket_h
 #define fonction_web_socket_h
 
+#include "rtc_clock.h"
+
 //////////////////////////////////////////websocket///////////////////////////////////////////////
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
 {
@@ -84,18 +86,31 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
         {
             if (payload[1] == 'o')
             {
-                time_on = (strtol((const char *)&payload[3], &pEnd, 8)); // on_time
+                int hou = (payload[3] * 10) + (payload[4]);
+                int minu = (payload[6] * 10) + (payload[7]);
+                RtcDateTime time_on(0,
+                                    0,
+                                    0,
+                                    hou,
+                                    minu,
+                                    0);
+
 #ifdef DEBUG
-                Serial.print(" on_time : ");
-                Serial.print(time_on);
+                printDateTime(time_on);
 #endif
             }
             else if (payload[1] = 'f')
             {
-                time_off = (strtol((const char *)&payload[3], &pEnd, 8)); // off_time
+                int hou = (payload[3] * 10) + (payload[4]);
+                int minu = (payload[6] * 10) + (payload[7]);
+                RtcDateTime time_off(0,
+                                     0,
+                                     0,
+                                     hou,
+                                     minu,
+                                     0);
 #ifdef DEBUG
-                Serial.print(" off_time : ");
-                Serial.print(time_off);
+                printDateTime(time_off);
 #endif
             }
 
@@ -105,31 +120,80 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
         {
             if (payload[1] == '1')
             {
-
+                if (payload[3] == 'f')
+                {
+                   D_W[1] = true; 
+                }
+                else 
+                {
+                    D_W[1] = false;
+                }
             }
             else if (payload[1] == '2')
             {
-                
+                if (payload[3] == 'f')
+                {
+                   D_W[2] = true; 
+                }
+                else 
+                {
+                    D_W[2] = false;
+                }
             }
             else if (payload[1] == '3')
             {
-                
+                if (payload[3] == 'f')
+                {
+                   D_W[3] = true; 
+                }
+                else 
+                {
+                    D_W[3] = false;
+                }
             }
             else if (payload[1] == '4')
             {
-                
+                if (payload[3] == 'f')
+                {
+                   D_W[4] = true; 
+                }
+                else 
+                {
+                    D_W[4] = false;
+                }
             }
             else if (payload[1] == '5')
             {
-                
+                if (payload[3] == 'f')
+                {
+                   D_W[5] = true; 
+                }
+                else 
+                {
+                    D_W[5] = false;
+                }
             }
             else if (payload[1] == '6')
             {
-                
+                if (payload[3] == 'f')
+                {
+                   D_W[6] = true; 
+                }
+                else 
+                {
+                    D_W[6] = false;
+                }
             }
             else if (payload[1] == '7')
             {
-                
+                if (payload[3] == 'f')
+                {
+                   D_W[7] = true; 
+                }
+                else 
+                {
+                    D_W[7] = false;
+                }
             }
 
         } // payload[0] == d
