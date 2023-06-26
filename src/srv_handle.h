@@ -8,17 +8,11 @@
 
 void eeprom_read()
 {
-    FOR_PWM_CHANNELS = EEPROM.read(1);
 
     fade_in = EEPROM.read(2);
     fade_in |= (EEPROM.read(3) << 8);
     fade_in |= (EEPROM.read(4) << 16);
     fade_in |= (EEPROM.read(5) << 24);
-
-    decalage = EEPROM.read(6);
-    decalage |= (EEPROM.read(7) << 8);
-    decalage |= (EEPROM.read(8) << 16);
-    decalage |= (EEPROM.read(9) << 24);
 
     on = EEPROM.read(10);
     on |= (EEPROM.read(11) << 8);
@@ -37,14 +31,8 @@ void eeprom_read()
 
 #ifdef DEBUG
     Serial.println("EEPROM READ");
-    Serial.print(" FOR_PWM_CHANNELS : ");
-    Serial.print(FOR_PWM_CHANNELS);
-    Serial.print(" ");
     Serial.print(" fade_in : ");
     Serial.print(fade_in);
-    Serial.print(" ");
-    Serial.print(" decalage : ");
-    Serial.print(decalage);
     Serial.print(" ");
     Serial.print(" on : ");
     Serial.print(on);
@@ -59,17 +47,12 @@ void eeprom_read()
 
 void eeprom_write()
 {
-    EEPROM.write(1, FOR_PWM_CHANNELS);
+    
 
     EEPROM.write(2, fade_in);
     EEPROM.write(3, fade_in >> 8);
     EEPROM.write(4, fade_in >> 16);
     EEPROM.write(5, fade_in >> 24);
-
-    EEPROM.write(6, decalage);
-    EEPROM.write(7, decalage >> 8);
-    EEPROM.write(8, decalage >> 16);
-    EEPROM.write(9, decalage >> 24);
 
     EEPROM.write(10, on);
     EEPROM.write(11, on >> 8);
@@ -92,14 +75,8 @@ void eeprom_write()
 
 #ifdef DEBUG
     Serial.println("EEPROM WRITE");
-    Serial.print(" FOR_PWM_CHANNELS : ");
-    Serial.print(FOR_PWM_CHANNELS);
-    Serial.print(" ");
     Serial.print(" fade_in : ");
     Serial.print(fade_in);
-    Serial.print(" ");
-    Serial.print(" decalage : ");
-    Serial.print(decalage);
     Serial.print(" ");
     Serial.print(" on : ");
     Serial.print(on);
