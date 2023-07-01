@@ -22,7 +22,7 @@ void setup()
 #endif
 
   // EEPROM
-  EEPROM.begin(EEPROM_SIZE);
+  prefs.begin("stamp",false);
   init_eeprom();
 
   //init led
