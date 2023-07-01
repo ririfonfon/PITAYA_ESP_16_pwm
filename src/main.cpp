@@ -17,8 +17,10 @@ void setup()
 {
 // init serial
 #ifdef DEBUG
+  delay(3000);
   Serial.begin(115200);
   Serial.println();
+  Serial.println("Hello World");
 #endif
 
   // EEPROM
@@ -32,18 +34,9 @@ void setup()
   init_btn();
 
   //init pwm
-  for (int k = 0; k < PWM_CHANNELS; k++)
-  {
-    ledcAttachPin(PWM_GPIOPIN[k], k);
-    ledcSetup(k, PWM_FREQUENCY, PWM_RESOLUTION);
-  }
+    ledcAttachPin(PWM_GPIOPIN, 0);
+    ledcSetup(0, PWM_FREQUENCY, PWM_RESOLUTION);
 
-#ifdef DEBUG
-  for (int k = 0; k > FOR_PWM_CHANNELS; k++)
-  {
-    Serial.println(ref[k]);
-  }
-#endif
 
   init_wifi();
   WiFi.mode(WIFI_OFF);

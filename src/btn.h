@@ -32,10 +32,7 @@ void check_btn()
         {
             WiFi.mode(WIFI_AP);
             start = false;
-            for (int d = 0; d < FOR_PWM_CHANNELS; d++)
-            {
-                ledcWrite(d, 0);
-            } //for(int d=0; d>FOR_PWM_CHANNELS;d++)
+            ledcWrite(0, 0);
         }
         webSocket.loop();
         server.handleClient();
