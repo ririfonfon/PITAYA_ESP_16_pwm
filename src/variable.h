@@ -5,7 +5,7 @@
 #define PWM_FREQUENCY 5000 //
 #define PWM_RESOLUTION 16  //
 
-uint8_t PWM_GPIOPIN[1] = {32};
+uint8_t PWM_GPIOPIN[1] = {18};
 uint8_t BTN_GPIOPIN = 39;
 
 long previousMillis = 0;
@@ -24,7 +24,7 @@ long fade_out = 8;            // Seconds
 long decalage = 2000;         // Milliseconds
 long on = 60000;              // Milliseconds
 long off = 40000;             // Milliseconds
-uint16_t High_value = 52428; // 65535= 100% donc 655,35 = 1% ,52428 = 80% , 58981 = 90%
+uint16_t High_value = 65535; // 65535= 100% donc 655,35 = 1% ,52428 = 80% , 58981 = 90%
 
 int value[PWM_CHANNELS] = {0};
 
