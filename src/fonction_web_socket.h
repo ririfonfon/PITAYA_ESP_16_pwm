@@ -88,12 +88,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 int hou = (payload[3] * 10) + (payload[4]);
                 int minu = (payload[6] * 10) + (payload[7]);
-                RtcDateTime time_on(0,
-                                    0,
-                                    0,
-                                    hou,
-                                    minu,
-                                    0);
+                RtcDateTime time_on(0, 0, 0, hou, minu, 0);
 
 #ifdef DEBUG
                 printDateTime(time_on);
@@ -103,12 +98,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 int hou = (payload[3] * 10) + (payload[4]);
                 int minu = (payload[6] * 10) + (payload[7]);
-                RtcDateTime time_off(0,
-                                     0,
-                                     0,
-                                     hou,
-                                     minu,
-                                     0);
+                RtcDateTime time_off(0, 0, 0, hou, minu, 0);
 #ifdef DEBUG
                 printDateTime(time_off);
 #endif
@@ -122,9 +112,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                   D_W[1] = true; 
+                    D_W[1] = true;
                 }
-                else 
+                else
                 {
                     D_W[1] = false;
                 }
@@ -133,9 +123,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                   D_W[2] = true; 
+                    D_W[2] = true;
                 }
-                else 
+                else
                 {
                     D_W[2] = false;
                 }
@@ -144,9 +134,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                   D_W[3] = true; 
+                    D_W[3] = true;
                 }
-                else 
+                else
                 {
                     D_W[3] = false;
                 }
@@ -155,9 +145,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                   D_W[4] = true; 
+                    D_W[4] = true;
                 }
-                else 
+                else
                 {
                     D_W[4] = false;
                 }
@@ -166,9 +156,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                   D_W[5] = true; 
+                    D_W[5] = true;
                 }
-                else 
+                else
                 {
                     D_W[5] = false;
                 }
@@ -177,9 +167,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                   D_W[6] = true; 
+                    D_W[6] = true;
                 }
-                else 
+                else
                 {
                     D_W[6] = false;
                 }
@@ -188,9 +178,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                   D_W[7] = true; 
+                    D_W[7] = true;
                 }
-                else 
+                else
                 {
                     D_W[7] = false;
                 }
