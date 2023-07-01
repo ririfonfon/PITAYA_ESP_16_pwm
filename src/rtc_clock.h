@@ -27,12 +27,13 @@ RtcDateTime time_on(now.Year(),
                     alarm_one.Hour(),
                     alarm_one.Minute(),
                     alarm_one.Second());
-RtcDateTime time_off(now.Year(),
-                     now.Month(),
-                     now.Day(),
-                     time_off_Hour,
-                     time_off_Minute,
-                     time_off_Second);
+RtcDateTime time_off;
+// (now.Year(),
+//                      now.Month(),
+//                      now.Day(),
+//                      time_off.Hour(),
+//                      time_off.Minute(),
+//                      0);
 
 void printDateTime(const RtcDateTime &dt)
 {
@@ -154,7 +155,6 @@ void init_clock()
     // Store something in memory on the Eeprom
 }
 
-
 void alarm_set()
 {
 
@@ -188,9 +188,9 @@ void alarm_set()
 
     DS3231AlarmOne alarm1(
         0,
-        time_on_Hour,
-        time_on_Minute,
-        time_on_Second,
+        time_on.Hour(),
+        time_on.Minute(),
+        0,
         DS3231AlarmOneControl_HoursMinutesSecondsMatch);
     Rtc.SetAlarmOne(alarm1);
 
