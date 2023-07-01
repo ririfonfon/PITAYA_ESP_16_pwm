@@ -53,6 +53,8 @@ void eeprom_read()
 
 void eeprom_write()
 {
+    prefs.putBool("check", true);
+
     int old_h = prefs.getUInt("t_h_on", 0);
     if (time_on.Hour() != old_h)
     {
@@ -98,7 +100,7 @@ void eeprom_write()
     int old_fo = prefs.getUInt("fade_out", 0);
     if (fade_out != old_fo)
     {
-        prefs.putUInt("fade_off", fade_out);
+        prefs.putUInt("fade_out", fade_out);
     }
 
     int old_d1 = prefs.getBool("d1", 0);
@@ -199,7 +201,15 @@ void save_spec()
 
 void init_eeprom()
 {
-    eeprom_read();
+        eeprom_write();
+    if (prefs.getBool("check", 0))
+    {
+        eeprom_read();
+    }
+    else
+    {
+        eeprom_write();
+    }
 } // init_eeprom()
 
 //////////////////////////////////////////srv_handle_set////////////////////////////////////////
