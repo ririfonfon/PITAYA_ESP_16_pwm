@@ -27,6 +27,9 @@ void setup()
   prefs.begin("stamp",false);
   init_eeprom();
 
+  //RTC
+  init_clock();
+
   //init led
   init_led();
 
