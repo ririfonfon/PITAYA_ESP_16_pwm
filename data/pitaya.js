@@ -278,9 +278,13 @@ function handle_M_B_S(e) {
 
     // SAVE: send clock
     if (val == 1) {
-        let clock = Math.floor(Date.now() / 1000); // now in seconds since 1970
-        submitVal('clock', clock);
-        console.log('clock: ' + clock);
+      var utc = new Date();
+      var offset = utc.getTimezoneOffset() * 60000;
+      let clock = Math.floor((Date.now() + offset) / 1000); // now in seconds since 1970 + time zone
+      let clocko = Math.floor((Date.now()) / 1000); // now in seconds since 1970
+      submitVal('clock', clock);
+      console.log('clock: ' + clock);
+      console.log('clocko: ' + clocko);
     }
 
 } //handle_M_B_S
