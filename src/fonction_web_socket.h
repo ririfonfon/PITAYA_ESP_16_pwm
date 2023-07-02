@@ -48,7 +48,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 char *pEnd;
                 fade_in = (strtol((const char *)&payload[2], &pEnd, 8)); // 2.6
 #ifdef DEBUG
-                Serial.print(" fade_in : ");
+                Serial.println(" fade_in : ");
                 Serial.print(fade_in);
 #endif
             } // b
@@ -57,7 +57,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 char *pEnd;
                 on = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
 #ifdef DEBUG
-                Serial.print(" on : ");
+                Serial.println(" on : ");
                 Serial.print(on);
 #endif
             } // d
@@ -66,7 +66,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 char *pEnd;
                 off = (strtol((const char *)&payload[2], &pEnd, 8)) * 1000;
 #ifdef DEBUG
-                Serial.print(" off : ");
+                Serial.println(" off : ");
                 Serial.print(off);
 #endif
             } // e
@@ -75,7 +75,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 char *pEnd;
                 fade_out = (strtol((const char *)&payload[2], &pEnd, 8)); // 2.6
 #ifdef DEBUG
-                Serial.print(" fade_out : ");
+                Serial.println(" fade_out : ");
                 Serial.print(fade_out);
 #endif
             } // e
@@ -91,6 +91,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 RtcDateTime time_on(0, 0, 0, hou, minu, 0);
 
 #ifdef DEBUG
+                Serial.println("time on = ");
                 printDateTime(time_on);
 #endif
             }
@@ -100,6 +101,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 int minu = (payload[6] * 10) + (payload[7]);
                 RtcDateTime time_off(0, 0, 0, hou, minu, 0);
 #ifdef DEBUG
+                Serial.println("time off = ");
                 printDateTime(time_off);
 #endif
             }
@@ -112,6 +114,17 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
+                    D_W[0] = true;
+                }
+                else
+                {
+                    D_W[0] = false;
+                }
+            }
+            else if (payload[1] == '2')
+            {
+                if (payload[3] == 'f')
+                {
                     D_W[1] = true;
                 }
                 else
@@ -119,7 +132,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                     D_W[1] = false;
                 }
             }
-            else if (payload[1] == '2')
+            else if (payload[1] == '3')
             {
                 if (payload[3] == 'f')
                 {
@@ -130,7 +143,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                     D_W[2] = false;
                 }
             }
-            else if (payload[1] == '3')
+            else if (payload[1] == '4')
             {
                 if (payload[3] == 'f')
                 {
@@ -141,7 +154,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                     D_W[3] = false;
                 }
             }
-            else if (payload[1] == '4')
+            else if (payload[1] == '5')
             {
                 if (payload[3] == 'f')
                 {
@@ -152,7 +165,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                     D_W[4] = false;
                 }
             }
-            else if (payload[1] == '5')
+            else if (payload[1] == '6')
             {
                 if (payload[3] == 'f')
                 {
@@ -163,7 +176,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                     D_W[5] = false;
                 }
             }
-            else if (payload[1] == '6')
+            else if (payload[1] == '7')
             {
                 if (payload[3] == 'f')
                 {
@@ -172,17 +185,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
                 else
                 {
                     D_W[6] = false;
-                }
-            }
-            else if (payload[1] == '7')
-            {
-                if (payload[3] == 'f')
-                {
-                    D_W[7] = true;
-                }
-                else
-                {
-                    D_W[7] = false;
                 }
             }
 
