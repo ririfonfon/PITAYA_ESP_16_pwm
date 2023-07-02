@@ -201,7 +201,7 @@ void save_spec()
 
 void init_eeprom()
 {
-        eeprom_write();
+    // eeprom_write();
     if (prefs.getBool("check", 0))
     {
         eeprom_read();
@@ -234,7 +234,7 @@ void srv_handle_set()
 
             if (LMem == 1)
             {
-                save_spec();
+                // save_spec();
             } // if(Mem==1){
         }     // serveur mem
 
@@ -247,9 +247,12 @@ void srv_handle_set()
 
             RtcDateTime newClock;
             newClock.InitWithUnix32Time(clock);
+            Serial.println("newClock");
             printDateTime(newClock);
 
             Rtc.SetDateTime(newClock);
+
+            save_spec();
         }
 
     } // serveur args
