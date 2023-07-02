@@ -20,6 +20,8 @@ void pwm_loop()
     {
         f_i = true;
 #ifdef DEBUG
+        RtcDateTime now = Rtc.GetDateTime();
+        printDateTime(now);
         Serial.print(" f_i = ");
         Serial.print(f_i);
         Serial.print(" at ");
