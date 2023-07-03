@@ -86,23 +86,25 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
         {
             if (payload[1] == 'o')
             {
-                int hou = ((payload[3] - 16) * 10) + (payload[4] - 16);
-                int minu = ((payload[6] - 16) * 10) + (payload[7] - 16);
+                int hou = ((payload[3] - '0') * 10) + (payload[4] - '0' );
+                int minu = ((payload[6] - '0') * 10) + (payload[7] - '0');
                 RtcDateTime time_on(0, 0, 0, hou, minu, 0);
 
 #ifdef DEBUG
-                Serial.println("time on = ");
+                Serial.print("time on  ");
                 printDateTime(time_on);
+                Serial.println(" ");
 #endif
             }
             else if (payload[1] = 'f')
             {
-                int hou = ((payload[3] - 16) * 10) + (payload[4] - 16);
-                int minu = ((payload[6] - 16) * 10) + (payload[7] - 16);
+                int hou = ((payload[3] - '0') * 10) + (payload[4] - '0');
+                int minu = ((payload[6] - '0') * 10) + (payload[7] - '0');
                 RtcDateTime time_off(0, 0, 0, hou, minu, 0);
 #ifdef DEBUG
-                Serial.println("time off = ");
+                Serial.print("time off  ");
                 printDateTime(time_off);
+                Serial.println(" ");
 #endif
             }
 
