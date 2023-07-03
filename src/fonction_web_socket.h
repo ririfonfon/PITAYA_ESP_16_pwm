@@ -86,8 +86,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
         {
             if (payload[1] == 'o')
             {
-                int hou = (payload[3] * 10) + (payload[4]);
-                int minu = (payload[6] * 10) + (payload[7]);
+                int hou = ((payload[3] - 16) * 10) + (payload[4] - 16);
+                int minu = ((payload[6] - 16) * 10) + (payload[7] - 16);
                 RtcDateTime time_on(0, 0, 0, hou, minu, 0);
 
 #ifdef DEBUG
@@ -97,8 +97,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             }
             else if (payload[1] = 'f')
             {
-                int hou = (payload[3] * 10) + (payload[4]);
-                int minu = (payload[6] * 10) + (payload[7]);
+                int hou = ((payload[3] - 16) * 10) + (payload[4] - 16);
+                int minu = ((payload[6] - 16) * 10) + (payload[7] - 16);
                 RtcDateTime time_off(0, 0, 0, hou, minu, 0);
 #ifdef DEBUG
                 Serial.println("time off = ");
