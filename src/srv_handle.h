@@ -19,13 +19,13 @@ void eeprom_read()
 
     fade_out = prefs.getUInt("fade_out", 0);
 
-    D_W[1] = prefs.getBool("d1", 0);
-    D_W[2] = prefs.getBool("d2", 0);
-    D_W[3] = prefs.getBool("d3", 0);
-    D_W[4] = prefs.getBool("d4", 0);
-    D_W[5] = prefs.getBool("d5", 0);
-    D_W[6] = prefs.getBool("d6", 0);
-    D_W[7] = prefs.getBool("d7", 0);
+    D_W[0] = prefs.getBool("d1", 0);
+    D_W[1] = prefs.getBool("d2", 0);
+    D_W[2] = prefs.getBool("d3", 0);
+    D_W[3] = prefs.getBool("d4", 0);
+    D_W[4] = prefs.getBool("d5", 0);
+    D_W[5] = prefs.getBool("d6", 0);
+    D_W[6] = prefs.getBool("d7", 0);
 
     int hou = prefs.getUInt("t_h_on", 0);
     int minu = prefs.getUInt("t_m_on", 0);
@@ -47,6 +47,26 @@ void eeprom_read()
     Serial.print(off);
     Serial.print(" fade_out : ");
     Serial.print(fade_out);
+    Serial.print(" d1 : ");
+    Serial.print(D_W[0]);
+    Serial.print(" d2 : ");
+    Serial.print(D_W[1]);
+    Serial.print(" d3 : ");
+    Serial.print(D_W[2]);
+    Serial.print(" d4 : ");
+    Serial.print(D_W[3]);
+    Serial.print(" d5 : ");
+    Serial.print(D_W[4]);
+    Serial.print(" d6 : ");
+    Serial.print(D_W[5]);
+    Serial.print(" d7 : ");
+    Serial.print(D_W[6]);
+    Serial.println(" ");
+    Serial.print(" time_on ");
+    printDateTime(time_on);
+    Serial.println(" ");
+    Serial.print(" time_off ");
+    printDateTime(time_off);
     Serial.println(" ");
 #endif
 } // eeprom_read
@@ -104,45 +124,45 @@ void eeprom_write()
     }
 
     int old_d1 = prefs.getBool("d1", 0);
-    if (D_W[1] != old_d1)
+    if (D_W[0] != old_d1)
     {
-        prefs.putBool("d1", D_W[1]);
+        prefs.putBool("d1", D_W[0]);
     }
 
     int old_d2 = prefs.getBool("d2", 0);
-    if (D_W[2] != old_d2)
+    if (D_W[1] != old_d2)
     {
-        prefs.putBool("d2", D_W[2]);
+        prefs.putBool("d2", D_W[1]);
     }
 
     int old_d3 = prefs.getBool("d3", 0);
-    if (D_W[3] != old_d3)
+    if (D_W[2] != old_d3)
     {
-        prefs.putBool("d3", D_W[3]);
+        prefs.putBool("d3", D_W[2]);
     }
 
     int old_d4 = prefs.getBool("d4", 0);
-    if (D_W[4] != old_d4)
+    if (D_W[3] != old_d4)
     {
-        prefs.putBool("d4", D_W[4]);
+        prefs.putBool("d4", D_W[3]);
     }
 
     int old_d5 = prefs.getBool("d5", 0);
-    if (D_W[5] != old_d5)
+    if (D_W[4] != old_d5)
     {
-        prefs.putBool("d5", D_W[5]);
+        prefs.putBool("d5", D_W[4]);
     }
 
     int old_d6 = prefs.getBool("d6", 0);
-    if (D_W[6] != old_d6)
+    if (D_W[5] != old_d6)
     {
-        prefs.putBool("d6", D_W[6]);
+        prefs.putBool("d6", D_W[5]);
     }
 
     int old_d7 = prefs.getBool("d7", 0);
-    if (D_W[7] != old_d7)
+    if (D_W[6] != old_d7)
     {
-        prefs.putBool("d7", D_W[7]);
+        prefs.putBool("d7", D_W[6]);
     }
 
 #ifdef DEBUG
@@ -157,6 +177,26 @@ void eeprom_write()
     Serial.print(off);
     Serial.print(" fade_out : ");
     Serial.print(fade_out);
+    Serial.print(" d1 : ");
+    Serial.print(D_W[0]);
+    Serial.print(" d2 : ");
+    Serial.print(D_W[1]);
+    Serial.print(" d3 : ");
+    Serial.print(D_W[2]);
+    Serial.print(" d4 : ");
+    Serial.print(D_W[3]);
+    Serial.print(" d5 : ");
+    Serial.print(D_W[4]);
+    Serial.print(" d6 : ");
+    Serial.print(D_W[5]);
+    Serial.print(" d7 : ");
+    Serial.print(D_W[6]);
+    Serial.println(" ");
+    Serial.print(" time_on ");
+    printDateTime(time_on);
+    Serial.println(" ");
+    Serial.print(" time_off ");
+    printDateTime(time_off);
     Serial.println(" ");
 
 #endif
@@ -169,13 +209,13 @@ void load_spec()
     {
         if (list[i])
         {
-            webSocket.sendTXT(i, "d1/" + String(D_W[1]));
-            webSocket.sendTXT(i, "d2/" + String(D_W[2]));
-            webSocket.sendTXT(i, "d3/" + String(D_W[3]));
-            webSocket.sendTXT(i, "d4/" + String(D_W[4]));
-            webSocket.sendTXT(i, "d5/" + String(D_W[5]));
-            webSocket.sendTXT(i, "d6/" + String(D_W[6]));
-            webSocket.sendTXT(i, "d7/" + String(D_W[7]));
+            webSocket.sendTXT(i, "d1/" + String(D_W[0]));
+            webSocket.sendTXT(i, "d2/" + String(D_W[1]));
+            webSocket.sendTXT(i, "d3/" + String(D_W[2]));
+            webSocket.sendTXT(i, "d4/" + String(D_W[3]));
+            webSocket.sendTXT(i, "d5/" + String(D_W[4]));
+            webSocket.sendTXT(i, "d6/" + String(D_W[5]));
+            webSocket.sendTXT(i, "d7/" + String(D_W[6]));
             webSocket.sendTXT(i, "co/" + String(lround(time_on.Hour())) + ":" + String(lround(time_on.Minute())));
             webSocket.sendTXT(i, "cf/" + String(lround(time_off.Hour())) + ":" + String(lround(time_off.Minute())));
             webSocket.sendTXT(i, "bb:" + String(lround(fade_in)));
@@ -247,8 +287,9 @@ void srv_handle_set()
 
             RtcDateTime newClock;
             newClock.InitWithUnix32Time(clock);
-            Serial.println("newClock");
+            Serial.print("newClock");
             printDateTime(newClock);
+            Serial.println(" ");
 
             Rtc.SetDateTime(newClock);
 
