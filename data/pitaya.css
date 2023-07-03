@@ -56,6 +56,15 @@ form {
 
 /*FADER NAME*/
 
+#off_time {
+    height: 40px;
+    width: 50px;
+}
+
+#on_time {
+    height: 40px;
+    width: 50px;
+}
 
 
 input[type=checkbox] {
@@ -73,7 +82,7 @@ input[type=checkbox]:checked+label {
 
 .days {
     display: inline;
-    padding: 20% 20%;
+    padding: 0% 25%;
     text-align: center;
 
 }
@@ -87,7 +96,7 @@ input[type=checkbox]:checked+label {
 
 .clock-set {
     display: block;
-    padding: 0px 0px;
+    padding: 10px 10px;
     text-align: center;
 }
 
