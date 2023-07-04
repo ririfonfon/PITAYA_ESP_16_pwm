@@ -49,4 +49,12 @@ bool D_W[7] = {false,false,false,false,false,false,false};
 
 uint8_t increm = 180 ;
 
+uint8_t time_on_hour;
+uint8_t time_on_minute;
+uint8_t time_off_hour;
+uint8_t time_off_minute;
+
+String Message_on;
+String Message_off;
+
 #endif
