@@ -86,21 +86,27 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
         {
             if (payload[1] == 'o')
             {
-                int hou = ((payload[3] - '0') * 10) + (payload[4] - '0' );
-                int minu = ((payload[6] - '0') * 10) + (payload[7] - '0');
-                RtcDateTime time_on(0, 0, 0, hou, minu, 0);
+                time_on_hour = ((payload[3] - '0') * 10) + (payload[4] - '0' );
+                time_on_minute = ((payload[6] - '0') * 10) + (payload[7] - '0');
+                RtcDateTime time_on(0, 0, 0, time_on_hour, time_on_minute, 0);
 
 #ifdef DEBUG
                 Serial.print("time on  ");
                 printDateTime(time_on);
                 Serial.println(" ");
+                Serial.print("time_on.Hour()  ");
+                Serial.print(time_on.Hour());
+                Serial.println(" ");
+                Serial.print("time_on.Minute()  ");
+                Serial.print(time_on.Minute());
+                Serial.println(" ");
 #endif
             }
             else if (payload[1] = 'f')
             {
-                int hou = ((payload[3] - '0') * 10) + (payload[4] - '0');
-                int minu = ((payload[6] - '0') * 10) + (payload[7] - '0');
-                RtcDateTime time_off(0, 0, 0, hou, minu, 0);
+                time_off_hour = ((payload[3] - '0') * 10) + (payload[4] - '0');
+                time_off_minute = ((payload[6] - '0') * 10) + (payload[7] - '0');
+                RtcDateTime time_off(0, 0, 0, time_off_hour, time_off_minute, 0);
 #ifdef DEBUG
                 Serial.print("time off  ");
                 printDateTime(time_off);
@@ -116,77 +122,77 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             {
                 if (payload[3] == 'f')
                 {
-                    D_W[0] = true;
+                    D_W[0] = false;
                 }
                 else
                 {
-                    D_W[0] = false;
+                    D_W[0] = true;
                 }
             }
             else if (payload[1] == '2')
             {
                 if (payload[3] == 'f')
                 {
-                    D_W[1] = true;
+                    D_W[1] = false;
                 }
                 else
                 {
-                    D_W[1] = false;
+                    D_W[1] = true;
                 }
             }
             else if (payload[1] == '3')
             {
                 if (payload[3] == 'f')
                 {
-                    D_W[2] = true;
+                    D_W[2] = false;
                 }
                 else
                 {
-                    D_W[2] = false;
+                    D_W[2] = true;
                 }
             }
             else if (payload[1] == '4')
             {
                 if (payload[3] == 'f')
                 {
-                    D_W[3] = true;
+                    D_W[3] = false;
                 }
                 else
                 {
-                    D_W[3] = false;
+                    D_W[3] = true;
                 }
             }
             else if (payload[1] == '5')
             {
                 if (payload[3] == 'f')
                 {
-                    D_W[4] = true;
+                    D_W[4] = false;
                 }
                 else
                 {
-                    D_W[4] = false;
+                    D_W[4] = true;
                 }
             }
             else if (payload[1] == '6')
             {
                 if (payload[3] == 'f')
                 {
-                    D_W[5] = true;
+                    D_W[5] = false;
                 }
                 else
                 {
-                    D_W[5] = false;
+                    D_W[5] = true;
                 }
             }
             else if (payload[1] == '7')
             {
                 if (payload[3] == 'f')
                 {
-                    D_W[6] = true;
+                    D_W[6] = false;
                 }
                 else
                 {
-                    D_W[6] = false;
+                    D_W[6] = true;
                 }
             }
 
