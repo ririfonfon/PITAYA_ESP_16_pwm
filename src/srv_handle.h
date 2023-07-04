@@ -27,13 +27,13 @@ void eeprom_read()
     D_W[5] = prefs.getBool("d6", 0);
     D_W[6] = prefs.getBool("d7", 0);
 
-    int hou = prefs.getUInt("t_h_on", 0);
-    int minu = prefs.getUInt("t_m_on", 0);
-    RtcDateTime time_on(0, 0, 0, hou, minu, 0);
+    time_on_hour = prefs.getUInt("t_h_on", 0);
+    time_on_minute = prefs.getUInt("t_m_on", 0);
+    RtcDateTime time_on(0, 0, 0, time_on_hour, time_on_minute, 0);
 
-    int houf = prefs.getUInt("t_h_off", 0);
-    int minuf = prefs.getUInt("t_m_off", 0);
-    RtcDateTime time_off(0, 0, 0, houf, minuf, 0);
+    time_off_hour = prefs.getUInt("t_h_off", 0);
+    time_off_minute = prefs.getUInt("t_m_off", 0);
+    RtcDateTime time_off(0, 0, 0, time_off_hour, time_off_minute, 0);
 
 #ifdef DEBUG
     Serial.println("EEPROM READ");
@@ -76,27 +76,27 @@ void eeprom_write()
     prefs.putBool("check", true);
 
     int old_h = prefs.getUInt("t_h_on", 0);
-    if (time_on.Hour() != old_h)
+    if (time_on_hour != old_h)
     {
-        prefs.putUInt("t_h_on", time_on.Hour());
+        prefs.putUInt("t_h_on", time_on_hour);
     }
 
     int old_m = prefs.getUInt("t_m_on", 0);
-    if (time_on.Minute() != old_m)
+    if (time_on_minute != old_m)
     {
-        prefs.putUInt("t_m_on", time_on.Minute());
+        prefs.putUInt("t_m_on", time_on_minute);
     }
 
     int old_hf = prefs.getUInt("t_h_off", 0);
-    if (time_off.Hour() != old_hf)
+    if (time_off_hour != old_hf)
     {
-        prefs.putUInt("t_h_off", time_off.Hour());
+        prefs.putUInt("t_h_off", time_off_hour);
     }
 
     int old_mf = prefs.getUInt("t_m_off", 0);
-    if (time_off.Minute() != old_mf)
+    if (time_off_minute != old_mf)
     {
-        prefs.putUInt("t_m_off", time_off.Minute());
+        prefs.putUInt("t_m_off", time_off_minute);
     }
 
     int old_fi = prefs.getUInt("fade_in", 0);
@@ -167,37 +167,38 @@ void eeprom_write()
 
 #ifdef DEBUG
     Serial.println("EEPROM WRITE");
-    Serial.print(" fade_in : ");
-    Serial.print(fade_in);
-    Serial.print(" ");
-    Serial.print(" on : ");
-    Serial.print(on);
-    Serial.print(" ");
-    Serial.print(" off : ");
-    Serial.print(off);
-    Serial.print(" fade_out : ");
-    Serial.print(fade_out);
-    Serial.print(" d1 : ");
-    Serial.print(D_W[0]);
-    Serial.print(" d2 : ");
-    Serial.print(D_W[1]);
-    Serial.print(" d3 : ");
-    Serial.print(D_W[2]);
-    Serial.print(" d4 : ");
-    Serial.print(D_W[3]);
-    Serial.print(" d5 : ");
-    Serial.print(D_W[4]);
-    Serial.print(" d6 : ");
-    Serial.print(D_W[5]);
-    Serial.print(" d7 : ");
-    Serial.print(D_W[6]);
-    Serial.println(" ");
-    Serial.print(" time_on ");
-    printDateTime(time_on);
-    Serial.println(" ");
-    Serial.print(" time_off ");
-    printDateTime(time_off);
-    Serial.println(" ");
+    eeprom_read();
+    // Serial.print(" fade_in : ");
+    // Serial.print(fade_in);
+    // Serial.print(" ");
+    // Serial.print(" on : ");
+    // Serial.print(on);
+    // Serial.print(" ");
+    // Serial.print(" off : ");
+    // Serial.print(off);
+    // Serial.print(" fade_out : ");
+    // Serial.print(fade_out);
+    // Serial.print(" d1 : ");
+    // Serial.print(D_W[0]);
+    // Serial.print(" d2 : ");
+    // Serial.print(D_W[1]);
+    // Serial.print(" d3 : ");
+    // Serial.print(D_W[2]);
+    // Serial.print(" d4 : ");
+    // Serial.print(D_W[3]);
+    // Serial.print(" d5 : ");
+    // Serial.print(D_W[4]);
+    // Serial.print(" d6 : ");
+    // Serial.print(D_W[5]);
+    // Serial.print(" d7 : ");
+    // Serial.print(D_W[6]);
+    // Serial.println(" ");
+    // Serial.print(" time_on ");
+    // printDateTime(time_on);
+    // Serial.println(" ");
+    // Serial.print(" time_off ");
+    // printDateTime(time_off);
+    // Serial.println(" ");
 
 #endif
 } // eeprom_write
@@ -209,15 +210,97 @@ void load_spec()
     {
         if (list[i])
         {
-            webSocket.sendTXT(i, "d1/" + String(D_W[0]));
-            webSocket.sendTXT(i, "d2/" + String(D_W[1]));
-            webSocket.sendTXT(i, "d3/" + String(D_W[2]));
-            webSocket.sendTXT(i, "d4/" + String(D_W[3]));
-            webSocket.sendTXT(i, "d5/" + String(D_W[4]));
-            webSocket.sendTXT(i, "d6/" + String(D_W[5]));
-            webSocket.sendTXT(i, "d7/" + String(D_W[6]));
-            webSocket.sendTXT(i, "co/" + String(lround(time_on.Hour())) + ":" + String(lround(time_on.Minute())));
-            webSocket.sendTXT(i, "cf/" + String(lround(time_off.Hour())) + ":" + String(lround(time_off.Minute())));
+            if (D_W[0])
+            {
+                webSocket.sendTXT(i, "d1/true");
+            }
+            else
+            {
+                webSocket.sendTXT(i, "d1/false");
+            }
+            if (D_W[1])
+            {
+                webSocket.sendTXT(i, "d2/true");
+            }
+            else
+            {
+                webSocket.sendTXT(i, "d2/false");
+            }
+            if (D_W[2])
+            {
+                webSocket.sendTXT(i, "d3/true");
+            }
+            else
+            {
+                webSocket.sendTXT(i, "d3/false");
+            }
+            if (D_W[3])
+            {
+                webSocket.sendTXT(i, "d4/true");
+            }
+            else
+            {
+                webSocket.sendTXT(i, "d4/false");
+            }
+            if (D_W[4])
+            {
+                webSocket.sendTXT(i, "d5/true");
+            }
+            else
+            {
+                webSocket.sendTXT(i, "d5/false");
+            }
+            if (D_W[5])
+            {
+                webSocket.sendTXT(i, "d6/true");
+            }
+            else
+            {
+                webSocket.sendTXT(i, "d6/false");
+            }
+            if (D_W[6])
+            {
+                webSocket.sendTXT(i, "d7/true");
+            }
+            else
+            {
+                webSocket.sendTXT(i, "d7/false");
+            }
+            if (time_on_hour < 10)
+            {
+                Message_on = "0" + String(lround(time_on_hour));
+            }
+            else
+            {
+                Message_on = String(lround(time_on_hour));
+            }
+            if (time_on_minute < 10)
+            {
+                Message_on = Message_on + ":0" + String(lround(time_on_minute));
+            }
+            else
+            {
+                Message_on = Message_on + ":" + String(lround(time_on_minute));
+            }
+            webSocket.sendTXT(i, "co/" + Message_on);
+            
+            if (time_off_hour < 10)
+            {
+                Message_off = "0" + String(lround(time_off_hour));
+            }
+            else
+            {
+                Message_off = String(lround(time_off_hour));
+            }
+            if (time_off_minute < 10)
+            {
+                Message_off = Message_off + ":0" + String(lround(time_off_minute));
+            }
+            else
+            {
+                Message_off = Message_off + ":" + String(lround(time_off_minute));
+            }
+            webSocket.sendTXT(i, "cf/" + Message_off);
             webSocket.sendTXT(i, "bb:" + String(lround(fade_in)));
             webSocket.sendTXT(i, "bd:" + String(lround(on / 1000)));
             webSocket.sendTXT(i, "be:" + String(lround(off / 1000)));
