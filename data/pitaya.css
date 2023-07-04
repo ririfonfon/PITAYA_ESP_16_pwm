@@ -72,17 +72,17 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]+label {
-    color: #ccc;
+    color: #333;
     cursor: pointer;
 }
 
 input[type=checkbox]:checked+label {
-    color: #333;
+    color: #ccc;
 }
 
 .days {
     display: inline;
-    padding: 0% 25%;
+    padding: 0% 10%;
     text-align: center;
 
 }
@@ -96,19 +96,19 @@ input[type=checkbox]:checked+label {
 
 .clock-set {
     display: block;
-    padding: 10px 10px;
+    padding: 0px 0px;
     text-align: center;
 }
 
 .slider-title {
     display: block;
-    padding: 0px 3px;
+    padding: 0px 10px;
     text-align: center;
 }
 
 h1 {
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color: #d4cc5a;
     text-align: center;
 }
