@@ -65,36 +65,85 @@ function connect() {
 
             if (e.data.charAt(1) == '1') {
                 var data = e.data.split('/');
-                document.getElementById('daySu0').value = data[1];
+                if (data[1] == 'true')
+                {
+                    document.getElementById('daySu0').checked = true;
+                }
+                else
+                {
+                    document.getElementById('daySu0').checked = false;
+                }
             }
 
             if (e.data.charAt(1) == '2') {
                 var data = e.data.split('/');
-                document.getElementById('dayMo0').value = data[1];
+                if (data[1] == 'true')
+                {
+                    document.getElementById('dayMo0').checked = true;
+                }
+                else
+                {
+                    document.getElementById('dayMo0').checked = false;
+                }
             }
 
             if (e.data.charAt(1) == '3') {
                 var data = e.data.split('/');
-                document.getElementById('dayTu0').value = data[1];
+                if (data[1] == 'true')
+                {
+                    document.getElementById('dayTu0').checked = true;
+                }
+                else
+                {
+                    document.getElementById('dayTu0').checked = false;
+                }
             }
             if (e.data.charAt(1) == '4') {
                 var data = e.data.split('/');
-                document.getElementById('dayWe0').value = data[1];
+                if (data[1] == 'true')
+                {
+                    document.getElementById('dayWe0').checked = true;
+                }
+                else
+                {
+                    document.getElementById('dayWe0').checked = false;
+                }
             }
 
             if (e.data.charAt(1) == '5') {
                 var data = e.data.split('/');
-                document.getElementById('dayTh0').value = data[1];
+                if (data[1] == 'true')
+                {
+                    document.getElementById('dayTh0').checked = true;
+                }
+                else
+                {
+                    document.getElementById('dayTh0').checked = false;
+                }
             }
 
             if (e.data.charAt(1) == '6') {
                 var data = e.data.split('/');
-                document.getElementById('dayFr0').value = data[1];
+                if (data[1] == 'true')
+                {
+                    document.getElementById('dayFr0').checked = true;
+                }
+                else
+                {
+                    document.getElementById('dayFr0').checked = false;
+                }
             }
 
             if (e.data.charAt(1) == '7') {
                 var data = e.data.split('/');
-                document.getElementById('daySa0').value = data[1];
+                if (data[1] == 'true')
+                {
+                    document.getElementById('daySa0').checked = true;
+                }
+                else
+                {
+                    document.getElementById('daySa0').checked = false;
+                }
             }
         } //if d
 
@@ -177,9 +226,7 @@ function prepareVar6() {
 
 
 function prepareVar12() {
-    // var a = parseInt(document.getElementById('off_time').value).toString();
     var a = document.getElementById('on_time').value;
-    // if (a.length < 4) { a = '000' + a; }
     values = a;
     var data = "co/" + values;
     console.log('iData: ' + data);
@@ -187,9 +234,7 @@ function prepareVar12() {
 } //prepare 12
 
 function prepareVar13() {
-    // var a = parseInt(document.getElementById('off_time').value).toString();
     var a = document.getElementById('off_time').value;
-    // if (a.length < 4) { a = '000' + a; }
     values = a;
     var data = "cf/" + values;
     console.log('iData: ' + data);
