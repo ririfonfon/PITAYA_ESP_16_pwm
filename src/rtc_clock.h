@@ -88,7 +88,7 @@ void init_clock()
 {
     //--------RTC SETUP ------------
 
-    Rtc.Begin(22, 21); // the available pins for SDA, SCL
+    Rtc.Begin(21, 22); // the available pins for SDA, SCL
     RtcEeprom.Begin();
 
     RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
