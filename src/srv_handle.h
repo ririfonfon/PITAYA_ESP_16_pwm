@@ -82,18 +82,22 @@ void eeprom_read()
 
 void eeprom_write()
 {
+    bool check_time_on = false;
+
     prefs.putBool("check", true);
 
     int old_h = prefs.getUInt("t_h_on", 0);
     if (time_on_hour != old_h)
     {
         prefs.putUInt("t_h_on", time_on_hour);
+        check_time_on = true;
     }
 
     int old_m = prefs.getUInt("t_m_on", 0);
     if (time_on_minute != old_m)
     {
         prefs.putUInt("t_m_on", time_on_minute);
+        check_time_on = true;
     }
 
     int old_hf = prefs.getUInt("t_h_off", 0);
@@ -172,6 +176,11 @@ void eeprom_write()
     if (D_W[6] != old_d7)
     {
         prefs.putBool("d7", D_W[6]);
+    }
+
+    if (check_time_on)
+    {
+        alarm_set();
     }
 
 #ifdef DEBUG
