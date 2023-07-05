@@ -15,6 +15,10 @@
 
 void setup()
 {
+  // init led
+  init_led();
+  leds[0] = 0xFF0000;
+  FastLED.show();
 // init serial
 #ifdef DEBUG
   delay(3000);
@@ -24,30 +28,26 @@ void setup()
 #endif
 
   // EEPROM
-  prefs.begin("stamp",false);
+  prefs.begin("stamp", false);
   init_eeprom();
 
-  //RTC
+  // RTC
   init_clock();
 
-  //init led
-  init_led();
-
-  //init btn
+  // init btn
   init_btn();
 
-  //init pwm
-    ledcAttachPin(PWM_GPIOPIN, 0);
-    ledcSetup(0, PWM_FREQUENCY, PWM_RESOLUTION);
-
+  // init pwm
+  ledcAttachPin(PWM_GPIOPIN, 0);
+  ledcSetup(0, PWM_FREQUENCY, PWM_RESOLUTION);
 
   init_wifi();
   WiFi.mode(WIFI_OFF);
 
-} //void setup()
+} // void setup()
 
 void loop()
 {
   check_btn();
   pwm_loop();
-} //void loop()
+} // void loop()
