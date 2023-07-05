@@ -42,6 +42,8 @@ void print_wakeup_reason()
 
 void deep_sleep_init()
 {
+    leds[0] = 0x000000;
+    FastLED.show();
 
     // Increment boot number and print it every reboot
     ++bootCount;
@@ -60,8 +62,8 @@ void deep_sleep_init()
     Note that using internal pullups/pulldowns also requires
     RTC peripherals to be turned on.
     */
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_39,0); //1 = High, 0 = Low btn m5stamp
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_19,0); //1 = High, 0 = Low
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_26, 0); // 1 = High, 0 = Low DS3231 SQW
+    // esp_sleep_enable_ext0_wakeup(GPIO_NUM_39, 0); // 1 = High, 0 = Low btn m5stamp
 
     // If you were to use ext1, you would use it like
     // esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK, ESP_EXT1_WAKEUP_ALL_LOW);
@@ -73,6 +75,60 @@ void deep_sleep_init()
     Serial.println("Going to sleep now");
     esp_deep_sleep_start();
     Serial.println("This will never be printed");
+}
+
+void check_day_time()
+{
+    RtcDateTime now = Rtc.GetDateTime();
+    uint8_t dday = now.DayOfWeek();
+    int8_t dmoins = dday - 1;
+    if (dmoins == -1)
+    {
+        dmoins = 6;
+    }
+    uint16_t on_minutes = (time_on_hour * 60) + time_on_minute;
+    uint16_t off_minutes = (time_off_hour * 60) + time_off_minute;
+    uint16_t now_minutes = (now.Hour() * 60) + now.Minute();
+#ifdef DEBUG
+    Serial.println(" ");
+    Serial.print("check_day_time D_W[day] = ");
+    Serial.print(D_W[dday]);
+    Serial.print(" D_W[moins] = ");
+    Serial.print(D_W[dmoins]);
+    Serial.print(" now_minutes = ");
+    Serial.print(now_minutes);
+    Serial.print(" on_minutes = ");
+    Serial.print(on_minutes);
+    Serial.print(" off_minutes = ");
+    Serial.println(off_minutes);
+#endif
+
+    if (!D_W[dday] && !D_W[dmoins])
+    {
+        deep_sleep_init();
+    }
+    else if (!D_W[dday] && D_W[dmoins])
+    {
+        if (off_minutes < now_minutes)
+        {
+            deep_sleep_init();
+        }
+    }
+
+    if (on_minutes > off_minutes)
+    {
+        if (now_minutes < on_minutes && now_minutes > off_minutes)
+        {
+            deep_sleep_init();
+        }
+    }
+    else if (on_minutes < off_minutes)
+    {
+        if ( now_minutes < on_minutes || now_minutes > off_minutes)
+        {
+            deep_sleep_init();
+        }
+    }
 }
 
 #endif
