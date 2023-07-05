@@ -44,6 +44,15 @@ void setup()
   init_wifi();
   WiFi.mode(WIFI_OFF);
 
+  leds[0] = 0x00FF00;
+  FastLED.show();
+  long nowdelay = millis() + 3000;
+  while (nowdelay > millis())
+  {
+  check_btn();
+  }
+
+  check_day_time();
 } // void setup()
 
 void loop()
