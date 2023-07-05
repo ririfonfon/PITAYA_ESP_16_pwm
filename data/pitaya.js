@@ -2,16 +2,16 @@ window.addEventListener('load', setup);
 
 var connection;
 
-function connect() {
+`use strict`;
+function refreshTime() {
+    const timeDisplay = document.getElementById("time");
+    const dateString = new Date().toLocaleString();
+    const formattedString = dateString.replace(", ", " - ");
+    timeDisplay.textContent = formattedString;
+}
+setInterval(refreshTime, 1000);
 
-    `use strict`;
-    function refreshTime() {
-        const timeDisplay = document.getElementById("time");
-        const dateString = new Date().toLocaleString();
-        const formattedString = dateString.replace(", ", " - ");
-        timeDisplay.textContent = formattedString;
-    }
-    setInterval(refreshTime, 1000);
+function connect() {
 
     console.log('connect()');
     connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
