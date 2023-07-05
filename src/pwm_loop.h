@@ -18,6 +18,7 @@ void pwm_loop()
     check_btn();
     if (!f_i && !p)
     {
+        check_day_time();
         f_i = true;
 #ifdef DEBUG
         RtcDateTime now = Rtc.GetDateTime();
