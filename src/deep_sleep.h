@@ -61,7 +61,7 @@ void deep_sleep_init()
     RTC peripherals to be turned on.
     */
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_39,0); //1 = High, 0 = Low btn m5stamp
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_33,0); //1 = High, 0 = Low
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_19,0); //1 = High, 0 = Low
 
     // If you were to use ext1, you would use it like
     // esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK, ESP_EXT1_WAKEUP_ALL_LOW);
