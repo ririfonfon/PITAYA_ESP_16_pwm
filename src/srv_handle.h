@@ -35,11 +35,15 @@ void debug_eeprom()
     Serial.print(" d7 : ");
     Serial.print(D_W[6]);
     Serial.println(" ");
-    Serial.print(" time_on ");
-    printDateTime(time_on);
+    Serial.print(" time_on -> ");
+    Serial.print(time_on_hour);
+    Serial.print(":");
+    Serial.print(time_on_minute);
     Serial.println(" ");
-    Serial.print(" time_off ");
-    printDateTime(time_off);
+    Serial.print(" time_off -> ");
+    Serial.print(time_off_hour);
+    Serial.print(":");
+    Serial.print(time_off_minute);
     Serial.println(" ");
 }
 
