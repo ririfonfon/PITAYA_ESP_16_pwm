@@ -8,35 +8,8 @@ Preferences prefs;
 // #include <EEPROM.h>
 // #define EEPROM_SIZE 64
 
-void eeprom_read()
+void debug_eeprom()
 {
-
-    fade_in = prefs.getUInt("fade_in", 0);
-
-    on = prefs.getUInt("on", 0);
-
-    off = prefs.getUInt("off", 0);
-
-    fade_out = prefs.getUInt("fade_out", 0);
-
-    D_W[0] = prefs.getBool("d1", 0);
-    D_W[1] = prefs.getBool("d2", 0);
-    D_W[2] = prefs.getBool("d3", 0);
-    D_W[3] = prefs.getBool("d4", 0);
-    D_W[4] = prefs.getBool("d5", 0);
-    D_W[5] = prefs.getBool("d6", 0);
-    D_W[6] = prefs.getBool("d7", 0);
-
-    time_on_hour = prefs.getUInt("t_h_on", 0);
-    time_on_minute = prefs.getUInt("t_m_on", 0);
-    RtcDateTime time_on(0, 0, 0, time_on_hour, time_on_minute, 0);
-
-    time_off_hour = prefs.getUInt("t_h_off", 0);
-    time_off_minute = prefs.getUInt("t_m_off", 0);
-    RtcDateTime time_off(0, 0, 0, time_off_hour, time_off_minute, 0);
-
-#ifdef DEBUG
-    Serial.println("EEPROM READ");
     Serial.print(" fade_in : ");
     Serial.print(fade_in);
     Serial.print(" ");
@@ -68,6 +41,38 @@ void eeprom_read()
     Serial.print(" time_off ");
     printDateTime(time_off);
     Serial.println(" ");
+}
+
+void eeprom_read()
+{
+
+    fade_in = prefs.getUInt("fade_in", 0);
+
+    on = prefs.getUInt("on", 0);
+
+    off = prefs.getUInt("off", 0);
+
+    fade_out = prefs.getUInt("fade_out", 0);
+
+    D_W[0] = prefs.getBool("d1", 0);
+    D_W[1] = prefs.getBool("d2", 0);
+    D_W[2] = prefs.getBool("d3", 0);
+    D_W[3] = prefs.getBool("d4", 0);
+    D_W[4] = prefs.getBool("d5", 0);
+    D_W[5] = prefs.getBool("d6", 0);
+    D_W[6] = prefs.getBool("d7", 0);
+
+    time_on_hour = prefs.getUInt("t_h_on", 0);
+    time_on_minute = prefs.getUInt("t_m_on", 0);
+    RtcDateTime time_on(0, 0, 0, time_on_hour, time_on_minute, 0);
+
+    time_off_hour = prefs.getUInt("t_h_off", 0);
+    time_off_minute = prefs.getUInt("t_m_off", 0);
+    RtcDateTime time_off(0, 0, 0, time_off_hour, time_off_minute, 0);
+
+#ifdef DEBUG
+    Serial.println("EEPROM READ");
+    debug_eeprom();
 #endif
 } // eeprom_read
 
@@ -167,39 +172,7 @@ void eeprom_write()
 
 #ifdef DEBUG
     Serial.println("EEPROM WRITE");
-    eeprom_read();
-    // Serial.print(" fade_in : ");
-    // Serial.print(fade_in);
-    // Serial.print(" ");
-    // Serial.print(" on : ");
-    // Serial.print(on);
-    // Serial.print(" ");
-    // Serial.print(" off : ");
-    // Serial.print(off);
-    // Serial.print(" fade_out : ");
-    // Serial.print(fade_out);
-    // Serial.print(" d1 : ");
-    // Serial.print(D_W[0]);
-    // Serial.print(" d2 : ");
-    // Serial.print(D_W[1]);
-    // Serial.print(" d3 : ");
-    // Serial.print(D_W[2]);
-    // Serial.print(" d4 : ");
-    // Serial.print(D_W[3]);
-    // Serial.print(" d5 : ");
-    // Serial.print(D_W[4]);
-    // Serial.print(" d6 : ");
-    // Serial.print(D_W[5]);
-    // Serial.print(" d7 : ");
-    // Serial.print(D_W[6]);
-    // Serial.println(" ");
-    // Serial.print(" time_on ");
-    // printDateTime(time_on);
-    // Serial.println(" ");
-    // Serial.print(" time_off ");
-    // printDateTime(time_off);
-    // Serial.println(" ");
-
+    debug_eeprom();
 #endif
 } // eeprom_write
 
@@ -283,7 +256,7 @@ void load_spec()
                 Message_on = Message_on + ":" + String(lround(time_on_minute));
             }
             webSocket.sendTXT(i, "co/" + Message_on);
-            
+
             if (time_off_hour < 10)
             {
                 Message_off = "0" + String(lround(time_off_hour));
@@ -319,7 +292,6 @@ void save_spec()
     start = true;
     WiFi.mode(WIFI_OFF);
     cycle = true;
-    // pwm_loop();
 } // save_spec
 
 void init_eeprom()
