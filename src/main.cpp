@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#define DEBUG 1
+// #define DEBUG 1
 
 #include "variable.h"
 #include "led.h"
@@ -17,8 +17,7 @@ void setup()
 {
   // init led
   init_led();
-  leds[0] = 0xFF0000;
-  FastLED.show();
+
 // init serial
 #ifdef DEBUG
   delay(3000);
@@ -28,11 +27,13 @@ void setup()
 #endif
 
   // EEPROM
-  prefs.begin("stamp", false);
   init_eeprom();
 
   // RTC
   init_clock();
+
+  // PINS
+  init_pins();
 
   // init btn
   init_btn();
@@ -41,15 +42,17 @@ void setup()
   ledcAttachPin(PWM_GPIOPIN, 0);
   ledcSetup(0, PWM_FREQUENCY, PWM_RESOLUTION);
 
+  // init wifi
   init_wifi();
   WiFi.mode(WIFI_OFF);
 
+  // pause to setup mode btn
   leds[0] = 0x00FF00;
   FastLED.show();
   long nowdelay = millis() + 3000;
   while (nowdelay > millis())
   {
-  check_btn();
+    check_btn();
   }
 
   check_day_time();
