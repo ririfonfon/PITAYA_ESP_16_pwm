@@ -6,6 +6,9 @@
 
 uint8_t PWM_GPIOPIN = 18;
 uint8_t BTN_GPIOPIN = 39;
+uint8_t CMD_GPIOPIN = 19;
+uint8_t SQW_GPIOPIN = 26;
+
 
 long previousMillis = 0;
 bool cycle = true;
@@ -27,6 +30,7 @@ long fade_out = 10;            // Seconds
 long on = 1000;              // Milliseconds
 long off = 1000;             // Milliseconds
 uint16_t High_value = 65535; // 65535= 100% donc 655,35 = 1% ,52428 = 80% , 58981 = 90%
+long increm = 18 ;
 
 int value = 0;
 
@@ -46,8 +50,6 @@ bool start = true;
 int8_t time_zone = 1;
 
 bool D_W[7] = {false,false,false,false,false,false,false};
-
-uint8_t increm = 180 ;
 
 uint8_t time_on_hour;
 uint8_t time_on_minute;
