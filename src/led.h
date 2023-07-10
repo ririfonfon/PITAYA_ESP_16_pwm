@@ -27,6 +27,8 @@ void init_led()
 {
   FastLED.addLeds<SK6812, DATA_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
+  leds[0] = 0xFF0000;
+  FastLED.show();
 } // init_led
 
 #endif
