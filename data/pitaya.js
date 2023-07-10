@@ -9,7 +9,6 @@ function refreshTime() {
     const formattedString = dateString.replace(", ", " - ");
     timeDisplay.textContent = formattedString;
 }
-setInterval(refreshTime, 1000);
 
 function connect() {
 
@@ -65,99 +64,87 @@ function connect() {
 
             if (e.data.charAt(1) == '1') {
                 var data = e.data.split('/');
-                if (data[1] == 'true')
-                {
+                if (data[1] == 'true') {
                     document.getElementById('daySu0').checked = true;
                 }
-                else
-                {
+                else {
                     document.getElementById('daySu0').checked = false;
                 }
             }
 
             if (e.data.charAt(1) == '2') {
                 var data = e.data.split('/');
-                if (data[1] == 'true')
-                {
+                if (data[1] == 'true') {
                     document.getElementById('dayMo0').checked = true;
                 }
-                else
-                {
+                else {
                     document.getElementById('dayMo0').checked = false;
                 }
             }
 
             if (e.data.charAt(1) == '3') {
                 var data = e.data.split('/');
-                if (data[1] == 'true')
-                {
+                if (data[1] == 'true') {
                     document.getElementById('dayTu0').checked = true;
                 }
-                else
-                {
+                else {
                     document.getElementById('dayTu0').checked = false;
                 }
             }
             if (e.data.charAt(1) == '4') {
                 var data = e.data.split('/');
-                if (data[1] == 'true')
-                {
+                if (data[1] == 'true') {
                     document.getElementById('dayWe0').checked = true;
                 }
-                else
-                {
+                else {
                     document.getElementById('dayWe0').checked = false;
                 }
             }
 
             if (e.data.charAt(1) == '5') {
                 var data = e.data.split('/');
-                if (data[1] == 'true')
-                {
+                if (data[1] == 'true') {
                     document.getElementById('dayTh0').checked = true;
                 }
-                else
-                {
+                else {
                     document.getElementById('dayTh0').checked = false;
                 }
             }
 
             if (e.data.charAt(1) == '6') {
                 var data = e.data.split('/');
-                if (data[1] == 'true')
-                {
+                if (data[1] == 'true') {
                     document.getElementById('dayFr0').checked = true;
                 }
-                else
-                {
+                else {
                     document.getElementById('dayFr0').checked = false;
                 }
             }
 
             if (e.data.charAt(1) == '7') {
                 var data = e.data.split('/');
-                if (data[1] == 'true')
-                {
+                if (data[1] == 'true') {
                     document.getElementById('daySa0').checked = true;
                 }
-                else
-                {
+                else {
                     document.getElementById('daySa0').checked = false;
                 }
             }
         } //if d
 
         if (e.data.charAt(0) == 'c') {
-            if (e.data.charAt(1) == 'o'){
+            if (e.data.charAt(1) == 'o') {
                 var data = e.data.split('/');
-                document.getElementById('on_time').value = data[1]; 
+                document.getElementById('on_time').value = data[1];
             }
-            if (e.data.charAt(1) == 'f'){
+            if (e.data.charAt(1) == 'f') {
                 var data = e.data.split('/');
-                document.getElementById('off_time').value = data[1];  
+                document.getElementById('off_time').value = data[1];
             }
 
         }
+
+        setInterval(refreshTime, 1000);
 
     }; //function (e)
 
@@ -323,13 +310,13 @@ function handle_M_B_S(e) {
 
     // SAVE: send clock
     if (val == 1) {
-      let utc = new Date();
-      let offset = utc.getTimezoneOffset();
-      let clock = Math.floor(new Date(utc.getTime() - offset * 60000) / 1000); // now in seconds since 1970 + time zone
-    //   let clocko = Math.floor((Date.now()) / 1000); // now in seconds since 1970
-      submitVal('clock', clock);
-      console.log('clock: ' + clock);
-      console.log('offset: ' + offset);
+        let utc = new Date();
+        let offset = utc.getTimezoneOffset();
+        let clock = Math.floor(new Date(utc.getTime() - offset * 60000) / 1000); // now in seconds since 1970 + time zone
+        //   let clocko = Math.floor((Date.now()) / 1000); // now in seconds since 1970
+        submitVal('clock', clock);
+        console.log('clock: ' + clock);
+        console.log('offset: ' + offset);
     }
 
 } //handle_M_B_S
