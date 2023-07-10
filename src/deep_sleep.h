@@ -44,6 +44,8 @@ void deep_sleep_init()
 {
     leds[0] = 0x000000;
     FastLED.show();
+    ledcWrite(0, 0);
+    digitalWrite(CMD_GPIOPIN, LOW);
 
     // Increment boot number and print it every reboot
     ++bootCount;
@@ -124,11 +126,19 @@ void check_day_time()
     }
     else if (on_minutes < off_minutes)
     {
-        if ( now_minutes < on_minutes || now_minutes > off_minutes)
+        if (now_minutes < on_minutes || now_minutes > off_minutes)
         {
             deep_sleep_init();
         }
     }
+}
+
+void init_pins()
+{
+    pinMode(SQW_GPIOPIN, INPUT);  // SQW DS3231
+    pinMode(CMD_GPIOPIN, OUTPUT); // CMD Relais
+    digitalWrite(CMD_GPIOPIN, LOW);
+    pinMode(PWM_GPIOPIN, OUTPUT); // PWM
 }
 
 #endif
