@@ -309,6 +309,7 @@ void save_spec()
 
 void init_eeprom()
 {
+    prefs.begin("stamp", false);
     // eeprom_write();
     if (prefs.getBool("check", 0))
     {
