@@ -33,6 +33,7 @@ void check_btn()
             WiFi.mode(WIFI_AP);
             start = false;
             ledcWrite(0, 0);
+            digitalWrite(CMD_GPIOPIN, LOW);
         }
         webSocket.loop();
         server.handleClient();
