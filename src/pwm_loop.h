@@ -3,13 +3,14 @@
 
 void pwm_loop()
 {
-    bool fade_clock;
+    bool fade_clock = true;
     unsigned long currentMillis = millis();
 
     if (cycle)
     {
         previousMillis = currentMillis;
         cycle = false;
+        digitalWrite(CMD_GPIOPIN, HIGH);
     } // if (cycle)
 
     onboard_led.on = millis() % 2000 < 1000;
@@ -29,14 +30,18 @@ void pwm_loop()
         Serial.print(" at ");
         Serial.println(currentMillis);
 #endif
-    } // if (!f_i[d] && !p[d] && currentMillis - previousMillis > (d + 1) * decalage)
+    } // if (!f_i[d] && !p)
 
     if (f_i)
     {
         if (fade_in != 0)
         {
-            fade_clock = millis() % fade_in < 1;
-            // fade_clock = true;
+            // fade_clock = millis() % fade_in > 3;
+            increm = round(168 / fade_in);
+            if (increm <= 0)
+            {
+                increm = 1;
+            }
             if (fade_clock && f_i)
             {
                 value += increm;
@@ -66,7 +71,7 @@ void pwm_loop()
             Serial.println(currentp);
 #endif
         } // else if (fade_in <= 0)
-    }     // if (f_i[d])
+    }     // if (f_i)
 
     if (!f_o && !n && p && currentMillis - currentp > on)
     {
@@ -77,13 +82,18 @@ void pwm_loop()
         Serial.print(" at ");
         Serial.println(currentMillis);
 #endif
-    } //(!p[FOR_PWM_CHANNELS] && !n[d] && p[d] && currentMillis - currentp[d] > on)
+    } //(!f_o && !n && p && currentMillis - currentp > on)
 
     if (f_o)
     {
         if (fade_out != 0)
         {
-            fade_clock = millis() % fade_out < 1;
+            // fade_clock = millis() % fade_out > 3;
+            increm = round(168 /fade_out);
+            if (increm <= 0)
+            {
+                increm = 1;
+            }
             if (fade_clock && f_o)
             {
                 value -= increm;
@@ -113,7 +123,7 @@ void pwm_loop()
             Serial.println(currentp);
 #endif
         } // else if (fade_out <= 0)
-    }     // if (f_i[d])
+    }     // if (f_o)
 
     if (!p && n)
     {
@@ -138,7 +148,12 @@ void pwm_loop()
 
     ledcWrite(0, value);
 
-    check_btn();
+    // Serial.print(" ");
+    // Serial.print(value);
+    // Serial.print(" ");
+    // Serial.print(fade_clock);
+
+    // check_btn();
 }
 
 #endif
