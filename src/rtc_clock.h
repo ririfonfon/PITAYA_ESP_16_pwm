@@ -35,7 +35,6 @@ void printDateTime(const RtcDateTime &dt)
 
 void init_clock()
 {
-    pinMode(26,INPUT); // SQW DS3231
     //--------RTC SETUP ------------
 
     Rtc.Begin(21, 22); // the available pins for SDA, SCL
