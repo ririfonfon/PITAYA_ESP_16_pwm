@@ -1,6 +1,7 @@
 window.addEventListener('load', setup);
 
 var connection;
+var reconnectTimer = null;
 
 `use strict`;
 function refreshTime() {
@@ -12,11 +13,15 @@ function refreshTime() {
 
 function connect() {
 
+    if (reconnectTimer) clearTimeout(reconnectTimer)
+
     console.log('connect()');
     connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
 
     connection.onopen = function () {
         connection.send('Connect ' + new Date());
+        console.log('WS connected')
+        submitVal("mem", 0);
     };
 
     connection.onmessage = function (e) {
@@ -151,7 +156,8 @@ function connect() {
     connection.onclose = function (e) {
         console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
         connection.close();
-        setTimeout(function () {
+        if (reconnectTimer) clearTimeout(reconnectTimer)
+        reconnectTimer  = setTimeout(function () {
             connect();
         }, 1000);
     };
@@ -159,13 +165,14 @@ function connect() {
     connection.onerror = function (err) {
         console.error('Socket encountered error: ', err.message, 'Closing socket');
         connection.close();
-        setTimeout(function () {
+        if (reconnectTimer) clearTimeout(reconnectTimer)
+        reconnectTimer = setTimeout(function () {
             connect();
         }, 1000);
     };
 }
 
-connect();
+
 
 id_array = new Array('cc1');
 values = new Array(id_array.length);
@@ -321,13 +328,15 @@ function handle_M_B_S(e) {
 
 } //handle_M_B_S
 
-function setup() {
+function setup() 
+{
     console.log('setup()');
+
+    connect();
     var xhttp = new XMLHttpRequest();
 
     elems = document.querySelectorAll('ul li a'); // adds listener
     [].forEach.call(elems, function (el) {
         el.addEventListener('click', handle_M_B_S, false);
     });
-    submitVal("mem", 0);
 }
