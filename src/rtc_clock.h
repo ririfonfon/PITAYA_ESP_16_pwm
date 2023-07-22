@@ -21,6 +21,52 @@ char DaysOfWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"
 
 // DS3231AlarmOne alarm_one = Rtc.GetAlarmOne();
 
+void Rtc_SetDateTime(RtcDateTime _datetime)
+{
+    Rtctime.hours = _datetime.Hour(); // Set the rtc clock time.
+    Rtctime.minutes = _datetime.Minute();
+    Rtctime.seconds = _datetime.Second();
+
+    Rtcdate.weekDay = _datetime.DayOfWeek(); // Set the rtc clock date.
+    Rtcdate.month = _datetime.Month();
+    Rtcdate.date = _datetime.Day();
+    Rtcdate.year = _datetime.Year();
+
+    Rtc.setTime(&Rtctime); // Example Synchronize the set time to the rtc.
+    Rtc.setDate(&Rtcdate); // Synchronize the set date to the rtc
+}
+
+RtcDateTime Rtc_GetDateTime()
+{
+    Rtc.getDate(&Rtcdate);
+    Rtc.getTime(&Rtctime);
+
+    char *monthchar, *datechar, *yearchar, *hourschar, *minuteschar, *secondschar, *datertc, *timertc;
+    const char *space = " ";
+    const char *dopo = ":";
+    strchr(monthchar, Rtcdate.month);
+    strchr(datechar, Rtcdate.date);
+    strchr(yearchar, Rtcdate.year);
+    strchr(hourschar, Rtctime.hours);
+    strchr(minuteschar, Rtctime.minutes);
+    strchr(secondschar, Rtctime.seconds);
+
+    strcpy(datertc, monthchar);
+    strcat(datertc, space);
+    strcat(datertc, datechar);
+    strcat(datertc, space);
+    strcat(datertc, yearchar);
+
+    strcpy(timertc, hourschar);
+    strcat(timertc, dopo);
+    strcat(timertc, minuteschar);
+    strcat(timertc, dopo);
+    strcat(timertc, secondschar);
+
+    RtcDateTime Result = RtcDateTime(datertc, timertc);
+    return Result;
+}
+
 void printDateTime(const RtcDateTime &dt)
 {
     char datestring[20];
@@ -64,10 +110,7 @@ void init_clock()
     }
     else if (Rtc.isEnable())
     {
-        Rtc.getDate(&Rtcdate);
-        Rtc.getTime(&Rtctime);
-
-        now = RtcDateTime(Rtcdate.month + ' ' + Rtcdate.date + ' ' + Rtcdate.year, Rtctime.hours + ':' + Rtctime.minutes + ':' + Rtctime.seconds);
+        now = Rtc_GetDateTime();
 
 #ifdef DEBUG
         Serial.print("now : ");
@@ -88,32 +131,24 @@ void init_clock()
         if (now < compiled)
         {
             Serial.println("RTC is older than compile time!  (Updating DateTime)");
-            Rtc.SetDateTime(compiled);
+            Rtc_SetDateTime(compiled);
         }
-
-        // never assume the Rtc was last configured by you, so
-        // just clear them to your needed state
-        // Rtc.Enable32kHzPin(false);
-        // Rtc.SetSquareWavePin(DS3231SquareWavePin_ModeNone);
-
-        /* comment out on a second run to see that the info is stored long term */
-        // Store something in memory on the Eeprom
     }
 }
 
 void alarm_set()
 {
 
-    Rtc.Enable32kHzPin(false);
-    Rtc.SetSquareWavePin(DS3231SquareWavePin_ModeAlarmBoth);
+    // Rtc.Enable32kHzPin(false);
+    // Rtc.SetSquareWavePin(DS3231SquareWavePin_ModeAlarmBoth);
 
-    DS3231AlarmOne alarm1(
-        0,
-        time_on_hour,
-        time_on_minute,
-        0,
-        DS3231AlarmOneControl_HoursMinutesSecondsMatch);
-    Rtc.SetAlarmOne(alarm1);
+    // DS3231AlarmOne alarm1(
+    //     0,
+    //     time_on_hour,
+    //     time_on_minute,
+    //     0,
+    //     DS3231AlarmOneControl_HoursMinutesSecondsMatch);
+    // Rtc.SetAlarmOne(alarm1);
 }
 
 #endif
