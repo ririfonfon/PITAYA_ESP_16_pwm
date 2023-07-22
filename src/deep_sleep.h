@@ -71,7 +71,7 @@ void deep_sleep_init()
     // esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK, ESP_EXT1_WAKEUP_ALL_LOW);
 
     // Latch RTC Alarm
-    Rtc.LatchAlarmsTriggeredFlags();
+    // Rtc.LatchAlarmsTriggeredFlags();
 
     // Go to sleep now
     Serial.println("Going to sleep now");
@@ -81,7 +81,7 @@ void deep_sleep_init()
 
 void check_day_time()
 {
-    RtcDateTime now = Rtc.GetDateTime();
+    RtcDateTime now = Rtc_GetDateTime();
     uint8_t dday = now.DayOfWeek();
     int8_t dmoins = dday - 1;
     if (dmoins == -1)
