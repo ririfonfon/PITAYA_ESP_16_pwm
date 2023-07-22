@@ -1,12 +1,9 @@
 #ifndef srv_handle_h
 #define srv_handle_h
 
-#include <RtcDS3231.h>
-
 #include <Preferences.h>
 Preferences prefs;
-// #include <EEPROM.h>
-// #define EEPROM_SIZE 64
+
 
 void debug_eeprom()
 {
@@ -360,7 +357,7 @@ void srv_handle_set()
             printDateTime(newClock);
             Serial.println(" ");
 
-            Rtc.SetDateTime(newClock);
+            Rtc_SetDateTime(newClock);
 
             save_spec();
         }
