@@ -22,7 +22,7 @@ void pwm_loop()
         check_day_time();
         f_i = true;
 #ifdef DEBUG
-        RtcDateTime now = Rtc.GetDateTime();
+        RtcDateTime now = Rtc_GetDateTime();
         printDateTime(now);
         Serial.println(" ");
         Serial.print(" f_i = ");
